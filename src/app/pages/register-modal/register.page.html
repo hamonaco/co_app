@@ -1,0 +1,29 @@
+
+<ion-content>
+
+  <ion-img class="logo-login" src="/assets/logo-solo.png"></ion-img>
+
+  <form #formulario="ngForm" (ngSubmit)="onClick()" class="form">
+
+    <h1 class="ion-padding">Registrarse</h1>
+
+    <ion-item class="input" lines="none">
+      <ion-input type="email" name="email" [(ngModel)]="usuario.email" required placeholder="Email"></ion-input>
+    </ion-item>
+    <ion-item lines="none" class="input" margin-top="10px">
+      <ion-input type="password" name="password" [(ngModel)]="usuario.password" placeholder="Contraseña" required></ion-input>
+    </ion-item>
+    <ion-item lines="none" class="input" margin-top="10px">
+      <ion-input type="password" name="passwordValid"  placeholder="Repetir contraseña" required></ion-input>
+    </ion-item>
+    <ion-row class="top-30">
+      <ion-col>
+        <ion-button class="top-20" shape="round" expand="full" fill="solid" color="medium" type="submit" (click)="registerOk()" [disabled]="formulario.invalid">Ok</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button class="top-20" shape="round" expand="full" fill="solid" color="tertiary" (click)="cancelarModal()">Cancelar</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>

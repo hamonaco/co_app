@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {NavParams} from '@ionic/angular';
+import {Nav} from '../../services/nav.service';
 
 @Component({
   selector: 'app-familia',
@@ -6,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./familia.page.scss'],
 })
 export class FamiliaPage implements OnInit {
+  title: string;
 
-  constructor() { }
+  constructor(private nav: Nav ) { }
 
   ngOnInit() {
+    this.title = this.nav.get();
+    console.log(this.title);
   }
 
 }

@@ -24,3 +24,19 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-back-button{
+  padding-top: 10px;
+  --icon-font-size: 35px !important;
+}
+
+@media screen {
+  .logo-login {
+    display: block;
+    height: 18%;
+    width: 40%;
+    margin: 35% auto 8% auto;
+  }
+}
+
+
