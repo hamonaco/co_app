@@ -62,7 +62,7 @@ export class HomePage implements OnInit {
   ngOnInit() {
   }
 
-  redirectTo(name: string) {
+  navigateTo(name: string) {
     return this.nav.push('familia', name);
   }
 

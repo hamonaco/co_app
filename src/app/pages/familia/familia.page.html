@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title text-center>{{title}}</ion-title>
     <ion-buttons slot="end">
-      <ion-button slot="icon-only">
+      <ion-button slot="icon-only" routerLink="/nueva-oferta">
         <ion-icon name="add"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -14,17 +14,6 @@
 
 <ion-content>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12" *ngFor="let i of [1,1,1,1,1,1,1,1,1,1,1,1,1,1]">
-
-        <ion-card>
-          <ion-card-title>Hola</ion-card-title>
-        </ion-card>
-
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
+  <app-productos [title]="title"></app-productos>
 
 </ion-content>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Nav} from '../../services/nav.service';
 
 @Component({
   selector: 'app-producto',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./producto.page.scss'],
 })
 export class ProductoPage implements OnInit {
+  title: string;
 
-  constructor() { }
+  constructor(private nav: Nav) { }
 
   ngOnInit() {
+this.title = this.nav.get();
+console.log(this.title);
   }
 
 }

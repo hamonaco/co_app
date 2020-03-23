@@ -20,7 +20,6 @@ export class Nav {
     }
 
     get() {
-        console.log(this.data);
         return this.data;
     }
 }

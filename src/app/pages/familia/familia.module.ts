@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { FamiliaPageRoutingModule } from './familia-routing.module';
 
 import { FamiliaPage } from './familia.page';
+import {ComponentModule} from '../../components/component.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FamiliaPageRoutingModule
+    FamiliaPageRoutingModule,
+    ComponentModule
   ],
   declarations: [FamiliaPage]
 })

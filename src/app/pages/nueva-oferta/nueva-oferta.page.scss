@@ -1,0 +1,22 @@
+.col-img{
+  height: 180px;
+  border: 1px grey;
+  background-color: grey;
+  border-radius: 24px;
+}
+.img-col {
+  width: 70%;
+  height: 70%;
+  /* display: grid; */
+  margin-left: 15%;
+  margin-top: 20%;
+}
+
+.input{
+  border: 1px solid #989aa2;
+  border-radius: 24px;
+}
+
+.native-input sc-ion-input-ios{
+  margin-left: 10% !important;
+}

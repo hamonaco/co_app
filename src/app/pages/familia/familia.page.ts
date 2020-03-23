@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {NavParams} from '@ionic/angular';
 import {Nav} from '../../services/nav.service';
 
 @Component({
@@ -11,11 +9,12 @@ import {Nav} from '../../services/nav.service';
 export class FamiliaPage implements OnInit {
   title: string;
 
-  constructor(private nav: Nav ) { }
+  constructor(private nav: Nav) { }
 
   ngOnInit() {
     this.title = this.nav.get();
     console.log(this.title);
   }
+
 
 }
