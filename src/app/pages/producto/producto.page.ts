@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Nav} from '../../services/nav.service';
+import {Producto} from '../../models/producto';
 
 @Component({
   selector: 'app-producto',
@@ -7,13 +8,14 @@ import {Nav} from '../../services/nav.service';
   styleUrls: ['./producto.page.scss'],
 })
 export class ProductoPage implements OnInit {
-  title: string;
+
+  producto: Producto;
 
   constructor(private nav: Nav) { }
 
   ngOnInit() {
-this.title = this.nav.get();
-console.log(this.title);
+this.producto = this.nav.get();
+console.log(this.producto);
   }
 
 }

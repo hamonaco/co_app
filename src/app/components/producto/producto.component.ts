@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Nav} from '../../services/nav.service';
+import {Producto} from '../../models/producto';
 
 @Component({
   selector: 'app-producto',
@@ -8,7 +9,7 @@ import {Nav} from '../../services/nav.service';
 })
 export class ProductoComponent implements OnInit {
 
-  @Input() title: string;
+  @Input() producto: Producto;
 
   constructor(private nav: Nav) { }
 
@@ -16,7 +17,7 @@ export class ProductoComponent implements OnInit {
 
   navigateTo() {
 
-    this.nav.push('producto', this.title);
+    this.nav.push('producto', this.producto);
 
   }
 
