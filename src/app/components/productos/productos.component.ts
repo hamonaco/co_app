@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Nav} from '../../services/nav.service';
+import {Producto} from '../../models/producto';
 
 @Component({
   selector: 'app-productos',
@@ -7,7 +8,7 @@ import {Nav} from '../../services/nav.service';
   styleUrls: ['./productos.component.scss'],
 })
 export class ProductosComponent implements OnInit {
-  @Input() title: string;
+  @Input() productos: Producto[];
 
   constructor(private nav: Nav) { }
 
