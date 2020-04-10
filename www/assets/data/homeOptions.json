@@ -1,0 +1,42 @@
+[
+  {
+  "icon": "/assets/Iconos/can.svg",
+  "name": "Almacen",
+  "redirectTo": "/familia"
+  },
+  {
+    "icon": "/assets/Iconos/bottle.svg",
+    "name": "Bebidas",
+    "redirectTo": "/familia"
+  },
+  {
+    "icon": "/assets/Iconos/harvest.svg",
+    "name": "Almacen",
+    "redirectTo": "/familia"
+  },
+  {
+    "icon": "/assets/Iconos/steak.svg",
+    "name": "Carnes y Pescados",
+    "redirectTo": "/familia"
+  },
+  {
+    "icon": "/assets/Iconos/cheese.svg",
+    "name": "Quesos y Fiambres",
+    "redirectTo": "/familia"
+  },
+  {
+    "icon": "/assets/Iconos/leche.svg",
+    "name": "Lacteos",
+    "redirectTo": "/familia"
+  },
+  {
+    "icon": "/assets/Iconos/freezer.svg",
+    "name": "Congelados",
+    "redirectTo": "/familia"
+  },
+  {
+    "icon": "/assets/Iconos/pie.svg",
+    "name": "Elaborados",
+    "redirectTo": "/familia"
+  }
+]
