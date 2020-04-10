@@ -51,7 +51,7 @@ export class LoginPage implements OnInit {
       }else{
       switch (res['status']) {
         case 400: {
-          this.alertService.alertConOk('Error!','Su email o contraseña son incorrectos')
+          this.alertService.alertConOk('Error!','Su email y/o contraseña son incorrectos')
           break;
         }
         case 500: {
