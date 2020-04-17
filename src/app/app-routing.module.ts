@@ -20,6 +20,10 @@ const routes: Routes = [
     path: 'nueva-oferta',
     loadChildren: () => import('./pages/nueva-oferta/nueva-oferta.module').then( m => m.NuevaOfertaPageModule)
   },
+  {
+    path: 'localizacion',
+    loadChildren: () => import('./pages/localizacion/localizacion.module').then( m => m.LocalizacionPageModule)
+  },
 ];
 
 @NgModule({
