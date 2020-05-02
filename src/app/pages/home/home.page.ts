@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {HomeOption} from '../../models/homeOption';
-import {HttpClient} from '@angular/common/http';
-import {NavController} from '@ionic/angular';
 import {Nav} from '../../services/nav.service';
+import {DataService} from '../../services/data.service';
+
 
 
 
@@ -12,6 +12,8 @@ import {Nav} from '../../services/nav.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  opciones : Array<object> = [];
+
 
   homeOptions: Array<HomeOption> = [
     {
@@ -26,7 +28,7 @@ export class HomePage implements OnInit {
     },
     {
       icon: '/assets/Iconos/harvest.svg',
-      name: 'Almacen',
+      name: 'Frutas',
       redirectTo: '/familia'
     },
     {
@@ -57,9 +59,13 @@ export class HomePage implements OnInit {
   ];
 
 
-  constructor(private nav: Nav) {}
+  constructor(private nav: Nav, private dataService: DataService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.dataService.getHomeOptions().then(res => {
+      // @ts-ignore
+      this.opciones = res;
+    })
   }
 
   navigateTo(name: string) {

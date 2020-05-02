@@ -24,11 +24,11 @@
   <ion-grid fixed>
     <ion-row class="margin-row">
       <ion-col class="col-1" size="6" size-lg="3" size-md="4" size-sm="6"
-               *ngFor="let option of homeOptions">
+               *ngFor="let option of opciones">
 
-        <ion-card class="card-1" (click)="navigateTo(option.name)">
-          <ion-img class="img-1" [src]="option.icon"></ion-img>
-         <ion-card-subtitle class="subtitle-1" text-center>{{option.name}}</ion-card-subtitle>
+        <ion-card class="card-1" (click)="navigateTo(option.nombre)">
+          <ion-img class="img-1" [src]="option.imagen"></ion-img>
+         <ion-card-subtitle class="subtitle-1" text-center>{{option.nombre}}</ion-card-subtitle>
         </ion-card>
       </ion-col>
 
