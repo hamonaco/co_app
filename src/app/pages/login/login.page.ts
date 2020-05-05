@@ -35,7 +35,7 @@ export class LoginPage implements OnInit {
     await modal.present();
 
     const {data} = await modal.onWillDismiss();
-  console.log(data)
+  console.log(data);
   }
 
 

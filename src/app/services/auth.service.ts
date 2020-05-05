@@ -14,7 +14,6 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient, private storage: Storage) { }
 
-
   login(email: string, password: string) {
     const data = {email, password};
 
@@ -31,6 +30,13 @@ export class AuthService {
   async guardarToken(token: string) {
     this.token = token;
     await this.storage.set('token', token);
+  }
+
+  registroUsuario(email: string, password: string, username: string){
+
+    const data = {email, password, username};
+
+    return  this.httpClient.post(`${URL}/user/crear`, data);
   }
 
 }
