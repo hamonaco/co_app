@@ -50,7 +50,7 @@ export class LoginPage implements OnInit {
         this.navController.navigateForward('/home')
       }else{
       switch (res['status']) {
-        case 400: {
+        case 401: {
           this.alertService.alertConOk('Error!','Su email y/o contraseña son incorrectos')
           break;
         }
