@@ -12,64 +12,19 @@ import {DataService} from '../../services/data.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  opciones : Array<object> = [];
-
-
-  homeOptions: Array<HomeOption> = [
-    {
-      icon: '/assets/Iconos/can.svg',
-      name: 'Almacen',
-      redirectTo: '/familia'
-    },
-    {
-      icon: '/assets/Iconos/bottle.svg',
-      name: 'Bebidas',
-      redirectTo: '/familia'
-    },
-    {
-      icon: '/assets/Iconos/harvest.svg',
-      name: 'Frutas',
-      redirectTo: '/familia'
-    },
-    {
-      icon: '/assets/Iconos/meat-fish.svg',
-      name: 'Carnes y Pescados',
-      redirectTo: '/familia'
-    },
-    {
-      icon: '/assets/Iconos/quesochori.png',
-      name: 'Quesos y Fiambres',
-      redirectTo: '/familia'
-    },
-    {
-      icon: '/assets/Iconos/leche1.png',
-      name: 'Lacteos',
-      redirectTo: '/familia'
-    },
-    {
-      icon: '/assets/Iconos/freezer.svg',
-      name: 'Congelados',
-      redirectTo: '/familia'
-    },
-    {
-      icon: '/assets/Iconos/pie.svg',
-      name: 'Elaborados',
-      redirectTo: '/familia'
-    }
-  ];
+  opciones : Array<HomeOption> = [];
 
 
   constructor(private nav: Nav, private dataService: DataService) {}
 
   async ngOnInit() {
     await this.dataService.getHomeOptions().then(res => {
-      // @ts-ignore
       this.opciones = res;
     })
   }
 
-  navigateTo(name: string) {
-    return this.nav.push('familia', name);
+  navigateTo(nombre: string) {
+    return this.nav.push('familia', nombre);
   }
 
 }

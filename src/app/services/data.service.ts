@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Producto} from '../models/producto';
 import {environment} from '../../environments/environment';
 import {Storage} from '@ionic/storage';
+import {HomeOption} from '../models/homeOption';
 
 const URL = environment.url;
 @Injectable({
@@ -20,8 +21,8 @@ export class DataService {
         await this.storage.get('token').then(res => {
             this.token = res
         });
-        return new Promise(resolve => {
-            this.httpClient.get(`${URL}/categorias`,{
+        return new Promise<HomeOption[]>(resolve => {
+            this.httpClient.get<HomeOption[]>(`${URL}/categorias`,{
                 headers: {
                     "Authorization": this.token
                 }}).subscribe(res => {
