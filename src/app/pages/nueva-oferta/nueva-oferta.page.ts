@@ -45,7 +45,7 @@ export class NuevaOfertaPage implements OnInit {
   }
 
   goBack(){
-    this.navController.back();
+    this.navController.navigateBack('familia')
   }
 
   redirectTo(){
