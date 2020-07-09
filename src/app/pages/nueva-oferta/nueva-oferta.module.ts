@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { NuevaOfertaPageRoutingModule } from './nueva-oferta-routing.module';
 
 import { NuevaOfertaPage } from './nueva-oferta.page';
+import {LocalizacionPage} from '../localizacion/localizacion.page';
+import {LocalizacionPageModule} from '../localizacion/localizacion.module';
 
 @NgModule({
+  entryComponents:[LocalizacionPage],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     NuevaOfertaPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LocalizacionPageModule
   ],
   declarations: [NuevaOfertaPage]
 })

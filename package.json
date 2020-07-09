@@ -24,6 +24,7 @@
     "@capacitor/ios": "^2.0.0",
     "@ionic/angular": "^4.7.1",
     "@ionic/storage": "^2.2.0",
+    "@types/mapbox-gl": "^1.11.0",
     "cordova-sqlite-storage": "^5.0.0",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.1",
