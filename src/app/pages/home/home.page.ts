@@ -19,6 +19,7 @@ export class HomePage implements OnInit {
 
   async ngOnInit() {
     await this.dataService.getHomeOptions().then(res => {
+      console.log(res);
       this.opciones = res;
     })
   }
