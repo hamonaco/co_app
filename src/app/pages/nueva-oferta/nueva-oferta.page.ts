@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Nav} from '../../services/nav.service';
-import {NavController} from '@ionic/angular';
+import {LoadingController, ModalController, NavController} from '@ionic/angular';
+import {Producto} from '../../models/producto';
+import {LocalizacionPage} from '../localizacion/localizacion.page';
+import {LocationService} from '../../services/location.service';
+
 
 @Component({
   selector: 'app-nueva-oferta',
@@ -13,7 +16,8 @@ export class NuevaOfertaPage implements OnInit {
   customDate: string = new Date().toISOString();
   nuevaOferta: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private navController: NavController) {
+
+  constructor(private formBuilder: FormBuilder, private navController: NavController, private modalController: ModalController, private locationService:LocationService, private loadingController:LoadingController) {
     this.nuevaOferta = this.formBuilder.group({
     precio: ['', Validators.required],
     categoria: ['', Validators.required],
@@ -21,7 +25,8 @@ export class NuevaOfertaPage implements OnInit {
       marca: ['', Validators.required],
       fechaVenc: [new Date().toISOString(), Validators.required],
       establecimiento: ['', Validators.required],
-      descripcion: ['']
+      descripcion: [''],
+      localizacion: ['']
     })
   }
 
@@ -48,12 +53,33 @@ export class NuevaOfertaPage implements OnInit {
     this.navController.navigateBack('familia')
   }
 
-  redirectTo(){
-    this.navController.navigateForward('localizacion');
+  async openRegisterModal() {
+    let loading = await this.loadingController.create({
+      message: 'Cargando...',
+      spinner: 'crescent'
+    });
+    await loading.present();
+    this.locationService.getCurrentPosition().then(async res => {
+      console.log(res);
+      const modal = await this.modalController.create({
+        component: LocalizacionPage,
+        componentProps:{
+          localizacion: {lat:res.coords.latitude,lng:res.coords.longitude,dragable:true}
+        }
+      });
+      await modal.present();
+
+      loading.dismiss();
+
+      const data = await modal.onWillDismiss();
+
+      this.nuevaOferta.controls['localizacion'].setValue(data.data);
+    })
+
   }
 
   publicarOferta() {
-    console.log(this.nuevaOferta);
+    console.log(this.nuevaOferta.value.localizacion);
   }
 
 }

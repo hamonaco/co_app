@@ -46,9 +46,10 @@ export class RegisterPage implements OnInit {
         .subscribe(() => {
           alert.present();
 
-        }, error => {
+        }, err => {
 
-            this.alert.alertConOk('Error', 'Ocurrio un error durante el registro. Vuelva a intentarlo')
+
+            this.alert.alertConOk('Error', err.error)
         })
     await loading.dismiss();
   }
