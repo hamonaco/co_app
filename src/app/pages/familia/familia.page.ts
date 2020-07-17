@@ -27,4 +27,8 @@ export class FamiliaPage implements OnInit {
     );
   }
 
+  nuevaOferta(){
+    this.nav.push('/nueva-oferta', this.title);
+  }
+
 }
