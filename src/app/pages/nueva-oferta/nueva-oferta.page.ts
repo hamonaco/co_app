@@ -4,6 +4,7 @@ import {LoadingController, ModalController, NavController} from '@ionic/angular'
 import {Producto} from '../../models/producto';
 import {LocalizacionPage} from '../localizacion/localizacion.page';
 import {LocationService} from '../../services/location.service';
+import {Nav} from '../../services/nav.service';
 
 
 @Component({
@@ -13,20 +14,21 @@ import {LocationService} from '../../services/location.service';
 })
 export class NuevaOfertaPage implements OnInit {
   customPickerOptions;
+  categoria : string;
   customDate: string = new Date().toISOString();
   nuevaOferta: FormGroup;
 
 
-  constructor(private formBuilder: FormBuilder, private navController: NavController, private modalController: ModalController, private locationService:LocationService, private loadingController:LoadingController) {
+  constructor(private nav: Nav, private formBuilder: FormBuilder, private navController: NavController, private modalController: ModalController, private locationService:LocationService, private loadingController:LoadingController) {
     this.nuevaOferta = this.formBuilder.group({
     precio: ['', Validators.required],
-    categoria: ['', Validators.required],
+    categoria: [this.nav.get(), Validators.required],
       producto: ['', Validators.required],
       marca: ['', Validators.required],
       fechaVenc: [new Date().toISOString(), Validators.required],
       establecimiento: ['', Validators.required],
       descripcion: [''],
-      localizacion: ['']
+      localizacion: ['',Validators.required]
     })
   }
 
@@ -79,7 +81,7 @@ export class NuevaOfertaPage implements OnInit {
   }
 
   publicarOferta() {
-    console.log(this.nuevaOferta.value.localizacion);
+    console.log(this.nuevaOferta.value);
   }
 
 }
