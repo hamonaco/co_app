@@ -20,7 +20,6 @@ export class LocalizacionPage implements AfterViewInit {
         this.lng = data.lng;
         this.lat = data.lat;
         this.dragable = data.dragable;
-        console.log(this.lng,this.lat,this.dragable);
     }
 
     async ngAfterViewInit() {

@@ -33,6 +33,22 @@ export class DataService {
         });
     }
 
+    async postOferta(oferta: Producto) {
+        await this.storage.get('token').then(res => {
+            this.token = res
+        });
+        return new Promise(resolve => {
+            this.httpClient.post(`${URL}/ofertas`,oferta,{
+                headers: {
+                    "Authorization": this.token
+                }}).subscribe(res => {
+                resolve(res);
+            }, error => {
+                resolve(error);
+            });
+        });
+    }
+
     getProductos() {
     return this.httpClient.get<Producto[]>('../assets/data/ofertasMock.json');
     }

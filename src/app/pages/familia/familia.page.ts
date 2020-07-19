@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Nav} from '../../services/nav.service';
 import {Producto} from '../../models/producto';
 import {DataService} from '../../services/data.service';
+import {HomeOption} from '../../models/homeOption';
 
 @Component({
   selector: 'app-familia',
@@ -9,26 +10,25 @@ import {DataService} from '../../services/data.service';
   styleUrls: ['./familia.page.scss'],
 })
 export class FamiliaPage implements OnInit {
-  title: string;
+  opcion: HomeOption;
   productos: Producto[];
 
   constructor(private nav: Nav, private dataService: DataService) { }
 
   ngOnInit() {
     this.cargarProductos();
-    this.title = this.nav.get();
+    this.opcion = this.nav.get();
   }
 
   cargarProductos() {
     this.dataService.getProductos().subscribe(data => {
-      console.log(data);
       this.productos = data;
         }
     );
   }
 
   nuevaOferta(){
-    this.nav.push('/nueva-oferta', this.title);
+    this.nav.push('/nueva-oferta', this.opcion);
   }
 
 }

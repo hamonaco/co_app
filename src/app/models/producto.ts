@@ -1,13 +1,15 @@
 export interface Producto {
     foto: string;
-    categoria: string;
+    categoria: number;
     marca: string;
     establecimiento: string;
     validez: string;
     fecha_pub: string;
     estado: string;
     precio: number;
-    nombre: string;
+    producto: string;
     descripcion: string;
-    localizacion: [];
+    lat: number;
+    long: number;
 }
+

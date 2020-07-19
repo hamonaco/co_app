@@ -19,13 +19,12 @@ export class HomePage implements OnInit {
 
   async ngOnInit() {
     await this.dataService.getHomeOptions().then(res => {
-      console.log(res);
       this.opciones = res;
     })
   }
 
-  navigateTo(nombre: string) {
-    return this.nav.push('familia', nombre);
+  navigateTo(opcion: HomeOption) {
+    return this.nav.push('familia', opcion);
   }
 
 }
