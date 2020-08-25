@@ -15,16 +15,19 @@ export class FamiliaPage implements OnInit {
 
   constructor(private nav: Nav, private dataService: DataService) { }
 
-  ngOnInit() {
-    this.cargarProductos();
+  async ngOnInit() {
     this.opcion = this.nav.get();
+    console.log(this.opcion);
+    await this.cargarProductos();
+
+
   }
 
-  cargarProductos() {
-    this.dataService.getProductos().subscribe(data => {
-      this.productos = data;
-        }
-    );
+  async cargarProductos() {
+    await this.dataService.getOfertas(this.opcion.id).then(res => {
+      console.log(res);
+      this.productos = res;
+    })
   }
 
   nuevaOferta(){
