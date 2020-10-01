@@ -11,8 +11,11 @@
 <form [formGroup]="nuevaOferta" (ngSubmit)="publicarOferta()">
     <ion-grid fixed padding>
         <ion-row>
-            <ion-col class="col-img" size="5">
-                <ion-img class="img-col" src="/assets/fotoicon.png"></ion-img>
+            <ion-col class="col-img" size="5" *ngIf="!foto">
+                <ion-img class="img-col" src="/assets/fotoicon.png" (click)="takePicture()"></ion-img>
+            </ion-col>
+            <ion-col class="col-img" size="5" *ngIf="foto">
+                <ion-img class="img-col" [src]="foto" (click)="takePicture()"></ion-img>
             </ion-col>
             <ion-col size="7">
 

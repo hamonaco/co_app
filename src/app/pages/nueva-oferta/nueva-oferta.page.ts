@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoadingController, ModalController, NavController} from '@ionic/angular';
 import {Producto} from '../../models/producto';
@@ -7,6 +7,10 @@ import {LocationService} from '../../services/location.service';
 import {Nav} from '../../services/nav.service';
 import {HomeOption} from '../../models/homeOption';
 import {DataService} from '../../services/data.service';
+import {CameraResultType, CameraSource, Plugins} from '@capacitor/core';
+import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
+
+const { Camera } = Plugins;
 
 
 @Component({
@@ -20,10 +24,11 @@ export class NuevaOfertaPage implements OnInit {
   categoria : HomeOption;
   customDate: Date = new Date();
   nuevaOferta: FormGroup;
+  foto: any;
   today: Date = new Date();
 
 
-  constructor(private nav: Nav, private formBuilder: FormBuilder, private navController: NavController, private modalController: ModalController, private locationService:LocationService, private loadingController:LoadingController, private dataService: DataService) {
+  constructor(private domSanitazer: DomSanitizer, private nav: Nav, private formBuilder: FormBuilder, private navController: NavController, private modalController: ModalController, private locationService:LocationService, private loadingController:LoadingController, private dataService: DataService) {
     this.nuevaOferta = this.formBuilder.group({
       precio: ['', Validators.required],
       categoria: [this.nav.get().nombre, Validators.required],
@@ -34,26 +39,42 @@ export class NuevaOfertaPage implements OnInit {
       descripcion: [''],
       localizacion: ['',Validators.required]
     });
-
-   /* this.customPickerOptions = {
-      buttons: [{
-        text: 'Ok',
-        handler: (data) => {
-          console.log(data);
-          this.customDate = data.toISOString();
-        }
-      }, {
-        text: 'Cancelar',
-        handler: () => {
-          console.log('Clicked Log. Do not Dismiss.');
-        }
-      }]
-    };*/
   }
 
   ngOnInit() {
     this.categoria = this.nav.get();
 
+  }
+
+  // async takePicture() {
+  //   const image = await Camera.getPhoto({
+  //     quality: 90,
+  //     allowEditing: true,
+  //     resultType: CameraResultType.Uri
+  //   });
+  //   // image.webPath will contain a path that can be set as an image src.
+  //   // You can access the original file using image.path, which can be
+  //   // passed to the Filesystem API to read the raw data of the image,
+  //   // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
+  //   var imageUrl = image.webPath;
+  //   var imagePath = image.path;
+  //   console.log(imagePath);
+  //   // Can be set to the src of an image now
+  //  // imageElement.src = imageUrl;
+  // }
+
+  async takePicture() {
+    try {
+      const result = await Camera.getPhoto({
+        quality: 75,
+        allowEditing: false,
+        resultType: CameraResultType.Uri
+      });
+      this.foto = result.webPath;
+      console.log(this.foto);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   goBack(){

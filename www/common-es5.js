@@ -401,6 +401,320 @@ var findCheckedOption = function (el, tagName) {
 
 
 
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/pages/localizacion/localizacion.page.html":
+/*!*************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/pages/localizacion/localizacion.page.html ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Ubicacion</ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-button (click)=\"guardarLocalizacion()\">Ok</ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div id='map'></div>\n\n\n</ion-content>\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/localizacion/localizacion-routing.module.ts":
+/*!*******************************************************************!*\
+  !*** ./src/app/pages/localizacion/localizacion-routing.module.ts ***!
+  \*******************************************************************/
+/*! exports provided: LocalizacionPageRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LocalizacionPageRoutingModule", function() { return LocalizacionPageRoutingModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _localizacion_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./localizacion.page */ "./src/app/pages/localizacion/localizacion.page.ts");
+
+
+
+
+var routes = [
+    {
+        path: '',
+        component: _localizacion_page__WEBPACK_IMPORTED_MODULE_3__["LocalizacionPage"]
+    }
+];
+var LocalizacionPageRoutingModule = /** @class */ (function () {
+    function LocalizacionPageRoutingModule() {
+    }
+    LocalizacionPageRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
+            exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]],
+        })
+    ], LocalizacionPageRoutingModule);
+    return LocalizacionPageRoutingModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/localizacion/localizacion.module.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/pages/localizacion/localizacion.module.ts ***!
+  \***********************************************************/
+/*! exports provided: LocalizacionPageModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LocalizacionPageModule", function() { return LocalizacionPageModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _localizacion_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./localizacion-routing.module */ "./src/app/pages/localizacion/localizacion-routing.module.ts");
+/* harmony import */ var _localizacion_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./localizacion.page */ "./src/app/pages/localizacion/localizacion.page.ts");
+
+
+
+
+
+
+
+var LocalizacionPageModule = /** @class */ (function () {
+    function LocalizacionPageModule() {
+    }
+    LocalizacionPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+                _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
+                _localizacion_routing_module__WEBPACK_IMPORTED_MODULE_5__["LocalizacionPageRoutingModule"]
+            ],
+            declarations: [_localizacion_page__WEBPACK_IMPORTED_MODULE_6__["LocalizacionPage"]]
+        })
+    ], LocalizacionPageModule);
+    return LocalizacionPageModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/localizacion/localizacion.page.scss":
+/*!***********************************************************!*\
+  !*** ./src/app/pages/localizacion/localizacion.page.scss ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "#map {\n  width: 100% !important;\n  height: 100% !important;\n  background-color: #f6f6f4;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9rYW5vL0NhemFuZG9PZmVydGFzL2NvX2FwcC9zcmMvYXBwL3BhZ2VzL2xvY2FsaXphY2lvbi9sb2NhbGl6YWNpb24ucGFnZS5zY3NzIiwic3JjL2FwcC9wYWdlcy9sb2NhbGl6YWNpb24vbG9jYWxpemFjaW9uLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHNCQUFBO0VBQ0EsdUJBQUE7RUFDQSx5QkFBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvbG9jYWxpemFjaW9uL2xvY2FsaXphY2lvbi5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjbWFwe1xuICB3aWR0aDogMTAwJSAhaW1wb3J0YW50O1xuICBoZWlnaHQ6IDEwMCUhaW1wb3J0YW50O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjZmNmY0O1xufVxuIiwiI21hcCB7XG4gIHdpZHRoOiAxMDAlICFpbXBvcnRhbnQ7XG4gIGhlaWdodDogMTAwJSAhaW1wb3J0YW50O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjZmNmY0O1xufSJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/pages/localizacion/localizacion.page.ts":
+/*!*********************************************************!*\
+  !*** ./src/app/pages/localizacion/localizacion.page.ts ***!
+  \*********************************************************/
+/*! exports provided: LocalizacionPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LocalizacionPage", function() { return LocalizacionPage; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
+
+
+var LocalizacionPage = /** @class */ (function () {
+    function LocalizacionPage(modalController, navParams) {
+        this.modalController = modalController;
+        this.navParams = navParams;
+        var data = this.navParams.get('localizacion');
+        this.lng = data.lng;
+        this.lat = data.lat;
+        this.dragable = data.dragable;
+    }
+    LocalizacionPage.prototype.ngAfterViewInit = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                mapboxgl.accessToken = 'pk.eyJ1Ijoia2FubzM3IiwiYSI6ImNrOTJybHBhODBiaW0zZm1qc2ZjYzgyamUifQ.dIQldDXjLDBBjziR04YEAA';
+                this.mapa = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: [this.lng, this.lat],
+                    zoom: 15 // starting zoom
+                });
+                this.mapa.on('load', function () {
+                    _this.mapa.resize();
+                    _this.crearMarcador(_this.lng, _this.lat, _this.dragable);
+                });
+                // Add zoom and rotation controls to the map.
+                this.mapa.addControl(new mapboxgl.NavigationControl());
+                return [2 /*return*/];
+            });
+        });
+    };
+    LocalizacionPage.prototype.crearMarcador = function (lng, lat, dragable) {
+        var _this = this;
+        var marker = new mapboxgl.Marker({
+            draggable: dragable
+        })
+            .setLngLat([lng, lat])
+            .addTo(this.mapa);
+        marker.on('drag', function () {
+            _this.lat = marker.getLngLat().lat;
+            _this.lng = marker.getLngLat().lng;
+        });
+    };
+    LocalizacionPage.prototype.guardarLocalizacion = function () {
+        this.modalController.dismiss({ lat: this.lat, lng: this.lng });
+    };
+    LocalizacionPage.ctorParameters = function () { return [
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"] }
+    ]; };
+    LocalizacionPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-localizacion',
+            template: __webpack_require__(/*! raw-loader!./localizacion.page.html */ "./node_modules/raw-loader/index.js!./src/app/pages/localizacion/localizacion.page.html"),
+            styles: [__webpack_require__(/*! ./localizacion.page.scss */ "./src/app/pages/localizacion/localizacion.page.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"]])
+    ], LocalizacionPage);
+    return LocalizacionPage;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/data.service.ts":
+/*!******************************************!*\
+  !*** ./src/app/services/data.service.ts ***!
+  \******************************************/
+/*! exports provided: DataService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataService", function() { return DataService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+
+
+
+
+
+var URL = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].url;
+var DataService = /** @class */ (function () {
+    function DataService(httpClient, storage) {
+        this.httpClient = httpClient;
+        this.storage = storage;
+        this.token = null;
+    }
+    DataService.prototype.getToken = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.storage.get('token').then(function (res) {
+                            _this.token = res;
+                        })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    DataService.prototype.getOfertas = function (categoria) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getToken()];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/, new Promise(function (resolve) {
+                                _this.httpClient.get(URL + "/ofertas?categoria=" + categoria, {
+                                    headers: {
+                                        "Authorization": _this.token
+                                    }
+                                }).subscribe(function (res) {
+                                    _this.storage.set('ofertas', res);
+                                    resolve(res);
+                                }, function (error) {
+                                    resolve(error);
+                                });
+                            })];
+                }
+            });
+        });
+    };
+    DataService.prototype.getHomeOptions = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getToken()];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/, new Promise(function (resolve) {
+                                _this.httpClient.get(URL + "/categorias", {
+                                    headers: {
+                                        "Authorization": _this.token
+                                    }
+                                }).subscribe(function (res) {
+                                    resolve(res);
+                                }, function (error) {
+                                    resolve(error);
+                                });
+                            })];
+                }
+            });
+        });
+    };
+    DataService.prototype.postOferta = function (oferta) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getToken()];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/, new Promise(function (resolve) {
+                                _this.httpClient.post(URL + "/ofertas", oferta, {
+                                    headers: {
+                                        "Authorization": _this.token
+                                    }
+                                }).subscribe(function (res) {
+                                    resolve(res);
+                                }, function (error) {
+                                    resolve(error);
+                                });
+                            })];
+                }
+            });
+        });
+    };
+    DataService.ctorParameters = function () { return [
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
+        { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_4__["Storage"] }
+    ]; };
+    DataService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _ionic_storage__WEBPACK_IMPORTED_MODULE_4__["Storage"]])
+    ], DataService);
+    return DataService;
+}());
+
+
+
 /***/ })
 
 }]);

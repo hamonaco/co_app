@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content>\n\n    <ion-img align-items-center class=\"logo-login\" src=\"/assets/logo-solo.png\"></ion-img>\n\n      <form #formulario=\"ngForm\" (ngSubmit)=\"onClick()\" class=\"form\">\n\n          <h1 class=\"ion-padding\">Iniciar Sesion</h1>\n\n          <ion-item class=\"input\" lines=\"none\">\n            <ion-input type=\"email\" name=\"email\" [(ngModel)]=\"usuario.email\" required placeholder=\"Email\"></ion-input>\n          </ion-item>\n          <ion-item lines=\"none\" class=\"input\" margin-top=\"10px\">\n            <ion-input type=\"password\" name=\"password\" [(ngModel)]=\"usuario.password\" placeholder=\"Contraseña\" required></ion-input>\n          </ion-item>\n            <ion-row class=\"top-30\">\n                <ion-col>\n                    <ion-button class=\"top-20\" shape=\"round\" expand=\"full\" fill=\"solid\" color=\"medium\" type=\"submit\" [disabled]=\"formulario.invalid\" (click)=\"loginService()\">Iniciar Sesion</ion-button>\n                </ion-col>\n                <ion-col>\n                    <ion-button class=\"top-20\" shape=\"round\" expand=\"full\" fill=\"solid\" color=\"tertiary\" (click)=\"openRegisterModal()\">Registrarte</ion-button>\n                </ion-col>\n            </ion-row>\n      </form>\n</ion-content>\n"
+module.exports = "<ion-content>\n\n    <ion-img align-items-center class=\"logo-login\" src=\"/assets/logo-solo.png\"></ion-img>\n\n      <form #formulario=\"ngForm\" (ngSubmit)=\"onClick()\" class=\"form\">\n\n          <h1 class=\"ion-padding\">Iniciar Sesion</h1>\n\n          <ion-item class=\"input\" lines=\"none\">\n            <ion-input type=\"email\" name=\"email\" [(ngModel)]=\"usuario.email\" required placeholder=\"Email\" pattern=\"[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})\"></ion-input>\n          </ion-item>\n          <ion-item lines=\"none\" class=\"input\" margin-top=\"10px\">\n            <ion-input type=\"password\" name=\"password\" [(ngModel)]=\"usuario.password\" placeholder=\"Contraseña\" required></ion-input>\n          </ion-item>\n            <ion-row class=\"top-30\">\n                <ion-col>\n                    <ion-button class=\"top-20\" shape=\"round\" expand=\"full\" fill=\"solid\" color=\"medium\" type=\"submit\" [disabled]=\"formulario.invalid\" (click)=\"loginService()\">Iniciar Sesion</ion-button>\n                </ion-col>\n                <ion-col>\n                    <ion-button class=\"top-20\" shape=\"round\" expand=\"full\" fill=\"solid\" color=\"tertiary\" (click)=\"openRegisterModal()\">Registrarte</ion-button>\n                </ion-col>\n            </ion-row>\n      </form>\n</ion-content>\n"
 
 /***/ }),
 
@@ -18,7 +18,7 @@ module.exports = "<ion-content>\n\n    <ion-img align-items-center class=\"logo-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<ion-content>\n\n  <ion-img class=\"logo-login\" src=\"/assets/logo-solo.png\"></ion-img>\n\n  <form #formulario=\"ngForm\" (ngSubmit)=\"onClick()\" class=\"form\">\n\n    <h1 class=\"ion-padding\">Registrarse</h1>\n\n    <ion-item class=\"input\" lines=\"none\">\n      <ion-input type=\"email\" name=\"email\" [(ngModel)]=\"usuario.email\" required placeholder=\"Email\"></ion-input>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"input\" margin-top=\"10px\">\n      <ion-input type=\"password\" name=\"password\" [(ngModel)]=\"usuario.password\" placeholder=\"Contraseña\" required></ion-input>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"input\" margin-top=\"10px\">\n      <ion-input type=\"password\" name=\"passwordValid\"  placeholder=\"Repetir contraseña\" required></ion-input>\n    </ion-item>\n    <ion-row class=\"top-30\">\n      <ion-col>\n        <ion-button class=\"top-20\" shape=\"round\" expand=\"full\" fill=\"solid\" color=\"medium\" type=\"submit\" (click)=\"registerOk()\" [disabled]=\"formulario.invalid\">Ok</ion-button>\n      </ion-col>\n      <ion-col>\n        <ion-button class=\"top-20\" shape=\"round\" expand=\"full\" fill=\"solid\" color=\"tertiary\" (click)=\"cancelarModal()\">Cancelar</ion-button>\n      </ion-col>\n    </ion-row>\n  </form>\n\n</ion-content>\n"
+module.exports = "\n<ion-content>\n\n  <ion-img class=\"logo-login\" src=\"/assets/logo-solo.png\"></ion-img>\n\n  <form #formulario=\"ngForm\" (ngSubmit)=\"onClick()\" class=\"form\">\n\n    <h1 class=\"ion-padding\">Registrarse</h1>\n\n    <ion-item class=\"input\" lines=\"none\">\n      <ion-input type=\"email\" name=\"email\" [(ngModel)]=\"usuario.email\" required placeholder=\"Email\" pattern=\"[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})\"></ion-input>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"input\" margin-top=\"10px\">\n      <ion-input type=\"text\" name=\"username\" [(ngModel)]=\"usuario.username\" placeholder=\"Nombre de usuario\" required></ion-input>\n    </ion-item>\n    <ion-item lines=\"none\" class=\"input\" margin-top=\"10px\">\n      <ion-input type=\"password\" name=\"password\" [(ngModel)]=\"usuario.password\" placeholder=\"Contraseña\" required></ion-input>\n    </ion-item>\n    <ion-row class=\"top-30\">\n      <ion-col>\n        <ion-button class=\"top-20\" shape=\"round\" expand=\"full\" fill=\"solid\" color=\"medium\" type=\"submit\" (click)=\"registerOk()\" [disabled]=\"formulario.invalid\">Ok</ion-button>\n      </ion-col>\n      <ion-col>\n        <ion-button class=\"top-20\" shape=\"round\" expand=\"full\" fill=\"solid\" color=\"tertiary\" (click)=\"cancelarModal()\">Cancelar</ion-button>\n      </ion-col>\n    </ion-row>\n  </form>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -203,7 +203,7 @@ var LoginPage = /** @class */ (function () {
                             }
                             else {
                                 switch (res['status']) {
-                                    case 400: {
+                                    case 401: {
                                         _this.alertService.alertConOk('Error!', 'Su email y/o contraseña son incorrectos');
                                         break;
                                     }
@@ -346,16 +346,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _services_alert_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/alert.service */ "./src/app/services/alert.service.ts");
+
+
 
 
 
 var RegisterPage = /** @class */ (function () {
-    function RegisterPage(modalController) {
+    function RegisterPage(alertController, alert, modalController, authService, loadingController) {
+        this.alertController = alertController;
+        this.alert = alert;
         this.modalController = modalController;
-        this.usuario = {
-            email: '',
-            password: '',
-        };
+        this.authService = authService;
+        this.loadingController = loadingController;
+        this.usuario = { email: '', password: '', username: '' };
     }
     RegisterPage.prototype.ngOnInit = function () {
     };
@@ -366,12 +371,54 @@ var RegisterPage = /** @class */ (function () {
         this.modalController.dismiss();
     };
     RegisterPage.prototype.registerOk = function () {
-        this.modalController.dismiss({
-            usuario: this.usuario
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var alert, loading;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.alertController.create({
+                            header: 'Registro Correcto',
+                            message: 'Ingresa a tu correo y finaliza el proceso de registro',
+                            buttons: [
+                                {
+                                    text: 'Ok',
+                                    handler: function () {
+                                        _this.modalController.dismiss();
+                                    }
+                                }
+                            ]
+                        })];
+                    case 1:
+                        alert = _a.sent();
+                        return [4 /*yield*/, this.loadingController.create({
+                                message: 'Cargando...',
+                                spinner: 'crescent'
+                            })];
+                    case 2:
+                        loading = _a.sent();
+                        return [4 /*yield*/, loading.present()];
+                    case 3:
+                        _a.sent();
+                        this.authService.registroUsuario(this.usuario.email, this.usuario.password, this.usuario.username)
+                            .subscribe(function () {
+                            alert.present();
+                        }, function (err) {
+                            _this.alert.alertConOk('Error', err.error);
+                        });
+                        return [4 /*yield*/, loading.dismiss()];
+                    case 4:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
         });
     };
     RegisterPage.ctorParameters = function () { return [
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] }
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
+        { type: _services_alert_service__WEBPACK_IMPORTED_MODULE_4__["AlertService"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
+        { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] }
     ]; };
     RegisterPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -379,7 +426,7 @@ var RegisterPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./register.page.html */ "./node_modules/raw-loader/index.js!./src/app/pages/register-modal/register.page.html"),
             styles: [__webpack_require__(/*! ./register.page.scss */ "./src/app/pages/register-modal/register.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"], _services_alert_service__WEBPACK_IMPORTED_MODULE_4__["AlertService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"], _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]])
     ], RegisterPage);
     return RegisterPage;
 }());
@@ -496,6 +543,10 @@ var AuthService = /** @class */ (function () {
                 }
             });
         });
+    };
+    AuthService.prototype.registroUsuario = function (email, password, username) {
+        var data = { email: email, password: password, username: username };
+        return this.httpClient.post(URL + "/user/crear", data);
     };
     AuthService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
