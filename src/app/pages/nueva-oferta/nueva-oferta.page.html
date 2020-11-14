@@ -44,9 +44,11 @@
         <ion-col>
           <ion-item lines="none" class="input" margin-top="10px">
             <ion-label>Vencimiento:</ion-label>
-            <ion-datetime [(ngModel)]="customDate"
-                          [pickerOptions]="customPickerOptions"
+            <ion-datetime [ngModel]="customDate.toISOString()"
                           placeholder="Valido hasta"
+                          doneText="Guardar"
+                          [min]="today.toISOString()"
+                          (ionChange)="cambioFecha($event)"
                           display-format="DD / MM / YYYY"
                           formControlName="fechaVenc">
             </ion-datetime>

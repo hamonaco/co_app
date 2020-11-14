@@ -17,10 +17,30 @@ export class DataService {
     constructor(private httpClient: HttpClient, private storage: Storage) {
     }
 
-    async getHomeOptions() {
-        await this.storage.get('token').then(res => {
+    async getToken(){
+        return await this.storage.get('token').then(res => {
             this.token = res
         });
+
+    }
+
+    async getOfertas(categoria: number){
+        await this.getToken();
+        return new Promise<Producto[]>(resolve => {
+            this.httpClient.get<Producto[]>(`${URL}/ofertas?categoria=${categoria}`,{
+                headers: {
+                    "Authorization": this.token
+                }}).subscribe(res => {
+                    this.storage.set('ofertas',res);
+                resolve(res);
+            }, error => {
+                resolve(error);
+            });
+        });
+    }
+
+    async getHomeOptions() {
+        await this.getToken();
         return new Promise<HomeOption[]>(resolve => {
             this.httpClient.get<HomeOption[]>(`${URL}/categorias`,{
                 headers: {
@@ -34,9 +54,7 @@ export class DataService {
     }
 
     async postOferta(oferta: Producto) {
-        await this.storage.get('token').then(res => {
-            this.token = res
-        });
+        await this.getToken()
         return new Promise(resolve => {
             this.httpClient.post(`${URL}/ofertas`,oferta,{
                 headers: {
@@ -49,8 +67,5 @@ export class DataService {
         });
     }
 
-    getProductos() {
-    return this.httpClient.get<Producto[]>('../assets/data/ofertasMock.json');
-    }
 
 }

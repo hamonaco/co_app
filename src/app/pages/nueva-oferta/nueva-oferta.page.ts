@@ -18,8 +18,9 @@ export class NuevaOfertaPage implements OnInit {
   customPickerOptions;
   oferta: Producto;
   categoria : HomeOption;
-  customDate: string = new Date().toISOString();
+  customDate: Date = new Date();
   nuevaOferta: FormGroup;
+  today: Date = new Date();
 
 
   constructor(private nav: Nav, private formBuilder: FormBuilder, private navController: NavController, private modalController: ModalController, private locationService:LocationService, private loadingController:LoadingController, private dataService: DataService) {
@@ -28,22 +29,18 @@ export class NuevaOfertaPage implements OnInit {
       categoria: [this.nav.get().nombre, Validators.required],
       producto: ['', Validators.required],
       marca: ['', Validators.required],
-      fechaVenc: [new Date().toISOString(), Validators.required],
+      fechaVenc: ['',Validators.required],
       establecimiento: ['', Validators.required],
       descripcion: [''],
       localizacion: ['',Validators.required]
-    })
-  }
+    });
 
-  ngOnInit() {
-    this.categoria = this.nav.get();
-    this.customPickerOptions = {
+   /* this.customPickerOptions = {
       buttons: [{
         text: 'Ok',
         handler: (data) => {
           console.log(data);
-          this.customDate = data.year.text;
-          console.log(this.customDate);
+          this.customDate = data.toISOString();
         }
       }, {
         text: 'Cancelar',
@@ -51,11 +48,20 @@ export class NuevaOfertaPage implements OnInit {
           console.log('Clicked Log. Do not Dismiss.');
         }
       }]
-    };
+    };*/
+  }
+
+  ngOnInit() {
+    this.categoria = this.nav.get();
+
   }
 
   goBack(){
     this.navController.navigateBack('familia')
+  }
+
+  cambioFecha(event){
+    this.nuevaOferta.controls['fechaVenc'].setValue(event.detail.value)
   }
 
   async openRegisterModal() {
@@ -105,7 +111,7 @@ export class NuevaOfertaPage implements OnInit {
     };
     this.dataService.postOferta(this.oferta).then(res => {
       console.log(res);
-      this.goBack();
+      this.navController.navigateBack('/home')
     });
     loading.dismiss();
   }
