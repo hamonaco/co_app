@@ -35,17 +35,12 @@ export class HomePage implements OnInit {
           {
             text: 'Si',
             handler: () => {
-              console.log('Confirm Okay');
               this.authService.logout();
             }
           },
           {
             text: 'No',
-            role: 'cancel',
-            cssClass: 'secondary',
-            handler: (blah) => {
-              console.log('Confirm Cancel: blah');
-            }
+            role: 'cancel'
           }
         ]
       });
