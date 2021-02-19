@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title text-center>{{title}}</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button slot=\"icon-only\" routerLink=\"/nueva-oferta\">\n        <ion-icon name=\"add\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <app-productos [productos]=\"productos\"></app-productos>\n\n</ion-content>\n"
+module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title text-center>{{opcion.nombre}}</ion-title>\n\n\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button>\n      <ion-icon name=\"more\"></ion-icon>\n    </ion-fab-button>\n\n    <ion-fab-list side=\"top\">\n      <ion-fab-button (click)=\"nuevaOferta()\">\n        <ion-icon color=\"primary\" name=\"add\"></ion-icon>\n      </ion-fab-button>\n      <ion-fab-button>\n        <ion-icon color=\"primary\" name=\"search\"></ion-icon>\n      </ion-fab-button>\n\n    </ion-fab-list>\n\n  </ion-fab>\n\n  <app-productos [productos]=\"productos\"></app-productos>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -100,7 +100,7 @@ FamiliaPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".icon-toolbar {\n  --icon-font-size: 5px ;\n}\n\n.row-card {\n  height: 60%;\n  border-bottom: 1px solid red;\n}\n\n.h1-card {\n  margin: 0px;\n}\n\n.h3-card {\n  margin: 0px;\n}\n\n.img-oferta {\n  height: 120%;\n  width: 120%;\n}\n\n.card {\n  margin-bottom: 1%;\n  margin-top: 1%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9rYW5vL0NhemFuZG9PZmVydGFzL2NvX2FwcC9zcmMvYXBwL3BhZ2VzL2ZhbWlsaWEvZmFtaWxpYS5wYWdlLnNjc3MiLCJzcmMvYXBwL3BhZ2VzL2ZhbWlsaWEvZmFtaWxpYS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxzQkFBQTtBQ0NGOztBREVBO0VBQ0UsV0FBQTtFQUNBLDRCQUFBO0FDQ0Y7O0FERUE7RUFDRSxXQUFBO0FDQ0Y7O0FERUE7RUFDRSxXQUFBO0FDQ0Y7O0FERUE7RUFDRSxZQUFBO0VBQ0EsV0FBQTtBQ0NGOztBREVBO0VBQ0UsaUJBQUE7RUFDQSxjQUFBO0FDQ0YiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9mYW1pbGlhL2ZhbWlsaWEucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmljb24tdG9vbGJhcntcbiAgLS1pY29uLWZvbnQtc2l6ZTogNXB4XG59XG5cbi5yb3ctY2FyZHtcbiAgaGVpZ2h0OiA2MCU7XG4gIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCByZWQ7XG59XG5cbi5oMS1jYXJke1xuICBtYXJnaW46IDBweDtcbn1cblxuLmgzLWNhcmR7XG4gIG1hcmdpbjogMHB4O1xufVxuXG4uaW1nLW9mZXJ0YXtcbiAgaGVpZ2h0OiAxMjAlO1xuICB3aWR0aDogMTIwJTtcbn1cblxuLmNhcmR7XG4gIG1hcmdpbi1ib3R0b206IDElO1xuICBtYXJnaW4tdG9wOiAxJTtcbn1cbiIsIi5pY29uLXRvb2xiYXIge1xuICAtLWljb24tZm9udC1zaXplOiA1cHggO1xufVxuXG4ucm93LWNhcmQge1xuICBoZWlnaHQ6IDYwJTtcbiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHJlZDtcbn1cblxuLmgxLWNhcmQge1xuICBtYXJnaW46IDBweDtcbn1cblxuLmgzLWNhcmQge1xuICBtYXJnaW46IDBweDtcbn1cblxuLmltZy1vZmVydGEge1xuICBoZWlnaHQ6IDEyMCU7XG4gIHdpZHRoOiAxMjAlO1xufVxuXG4uY2FyZCB7XG4gIG1hcmdpbi1ib3R0b206IDElO1xuICBtYXJnaW4tdG9wOiAxJTtcbn0iXX0= */"
+module.exports = ".icon-toolbar {\n  --icon-font-size: 5px ;\n}\n\n.row-card {\n  height: 60%;\n  border-bottom: 1px solid red;\n}\n\n.h1-card {\n  margin: 0px;\n}\n\n.h3-card {\n  margin: 0px;\n}\n\n.img-oferta {\n  height: 120%;\n  width: 120%;\n}\n\n.card {\n  margin-bottom: 1%;\n  margin-top: 1%;\n}\n\nion-fab {\n  margin-bottom: 5%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9rYW5vL0NhemFuZG9PZmVydGFzL2NvX2FwcC9zcmMvYXBwL3BhZ2VzL2ZhbWlsaWEvZmFtaWxpYS5wYWdlLnNjc3MiLCJzcmMvYXBwL3BhZ2VzL2ZhbWlsaWEvZmFtaWxpYS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxzQkFBQTtBQ0NGOztBREVBO0VBQ0UsV0FBQTtFQUNBLDRCQUFBO0FDQ0Y7O0FERUE7RUFDRSxXQUFBO0FDQ0Y7O0FERUE7RUFDRSxXQUFBO0FDQ0Y7O0FERUE7RUFDRSxZQUFBO0VBQ0EsV0FBQTtBQ0NGOztBREVBO0VBQ0UsaUJBQUE7RUFDQSxjQUFBO0FDQ0Y7O0FERUE7RUFDRSxpQkFBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvZmFtaWxpYS9mYW1pbGlhLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5pY29uLXRvb2xiYXJ7XG4gIC0taWNvbi1mb250LXNpemU6IDVweFxufVxuXG4ucm93LWNhcmR7XG4gIGhlaWdodDogNjAlO1xuICBib3JkZXItYm90dG9tOiAxcHggc29saWQgcmVkO1xufVxuXG4uaDEtY2FyZHtcbiAgbWFyZ2luOiAwcHg7XG59XG5cbi5oMy1jYXJke1xuICBtYXJnaW46IDBweDtcbn1cblxuLmltZy1vZmVydGF7XG4gIGhlaWdodDogMTIwJTtcbiAgd2lkdGg6IDEyMCU7XG59XG5cbi5jYXJke1xuICBtYXJnaW4tYm90dG9tOiAxJTtcbiAgbWFyZ2luLXRvcDogMSU7XG59XG5cbmlvbi1mYWJ7XG4gIG1hcmdpbi1ib3R0b206IDUlO1xufVxuIiwiLmljb24tdG9vbGJhciB7XG4gIC0taWNvbi1mb250LXNpemU6IDVweCA7XG59XG5cbi5yb3ctY2FyZCB7XG4gIGhlaWdodDogNjAlO1xuICBib3JkZXItYm90dG9tOiAxcHggc29saWQgcmVkO1xufVxuXG4uaDEtY2FyZCB7XG4gIG1hcmdpbjogMHB4O1xufVxuXG4uaDMtY2FyZCB7XG4gIG1hcmdpbjogMHB4O1xufVxuXG4uaW1nLW9mZXJ0YSB7XG4gIGhlaWdodDogMTIwJTtcbiAgd2lkdGg6IDEyMCU7XG59XG5cbi5jYXJkIHtcbiAgbWFyZ2luLWJvdHRvbTogMSU7XG4gIG1hcmdpbi10b3A6IDElO1xufVxuXG5pb24tZmFiIHtcbiAgbWFyZ2luLWJvdHRvbTogNSU7XG59Il19 */"
 
 /***/ }),
 
@@ -128,14 +128,22 @@ let FamiliaPage = class FamiliaPage {
         this.dataService = dataService;
     }
     ngOnInit() {
-        this.cargarProductos();
-        this.title = this.nav.get();
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            this.opcion = this.nav.get();
+            console.log(this.opcion);
+            yield this.cargarProductos();
+        });
     }
     cargarProductos() {
-        this.dataService.getProductos().subscribe(data => {
-            console.log(data);
-            this.productos = data;
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.dataService.getOfertas(this.opcion.id).then(res => {
+                console.log(res);
+                this.productos = res;
+            });
         });
+    }
+    nuevaOferta() {
+        this.nav.push('/nueva-oferta', this.opcion);
     }
 };
 FamiliaPage.ctorParameters = () => [
@@ -150,47 +158,6 @@ FamiliaPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_nav_service__WEBPACK_IMPORTED_MODULE_2__["Nav"], _services_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"]])
 ], FamiliaPage);
-
-
-
-/***/ }),
-
-/***/ "./src/app/services/data.service.ts":
-/*!******************************************!*\
-  !*** ./src/app/services/data.service.ts ***!
-  \******************************************/
-/*! exports provided: DataService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataService", function() { return DataService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-
-
-
-let DataService = class DataService {
-    constructor(httpClient) {
-        this.httpClient = httpClient;
-    }
-    getHomeOptions() {
-        return this.httpClient.get('../assets/data/homeOptions.json');
-    }
-    getProductos() {
-        return this.httpClient.get('../assets/data/ofertasMock.json');
-    }
-};
-DataService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
-];
-DataService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
-], DataService);
 
 
 

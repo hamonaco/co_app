@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {HomeOption} from '../../models/homeOption';
 import {Nav} from '../../services/nav.service';
 import {DataService} from '../../services/data.service';
+import {AuthService} from '../../services/auth.service';
+import {AlertService} from '../../services/alert.service';
+import {AlertController} from '@ionic/angular';
 
 
 
@@ -15,7 +18,7 @@ export class HomePage implements OnInit {
   opciones : Array<HomeOption> = [];
 
 
-  constructor(private nav: Nav, private dataService: DataService) {}
+  constructor(private nav: Nav, private dataService: DataService, private authService: AuthService, private alertController: AlertController) {}
 
   async ngOnInit() {
     await this.dataService.getHomeOptions().then(res => {
@@ -23,6 +26,28 @@ export class HomePage implements OnInit {
       console.log(res);
     });
   }
+
+  async logout(){
+      const alert = await this.alertController.create({
+        header: 'Cuidado!',
+        message: '¿Esta seguro que desea cerrar seesion?',
+        buttons: [
+          {
+            text: 'Si',
+            handler: () => {
+              this.authService.logout();
+            }
+          },
+          {
+            text: 'No',
+            role: 'cancel'
+          }
+        ]
+      });
+
+      await alert.present();
+    };
+
 
   navigateTo(opcion: HomeOption) {
     return this.nav.push('familia', opcion);

@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
   }
 
   onClick() {
-    console.log(this.usuario);
+
   }
 
   async openRegisterModal() {
@@ -47,7 +47,7 @@ export class LoginPage implements OnInit {
     await loading.present();
     this.authService.login(this.usuario.email, this.usuario.password).then(res => {
       if (res == true){
-        this.navController.navigateForward('/home')
+        this.navController.navigateRoot('/home', {animated: true});
       }else{
       switch (res['status']) {
         case 401: {

@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button>\n        <ion-icon name=\"menu\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n\n\n    <ion-img class=\"logo-header\" src=\"/assets/logo-solo.png\"></ion-img>\n\n\n    <ion-buttons slot=\"end\">\n      <ion-button>\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n      <ion-img class=\"logo\" src=\"/assets/logo-titulo.jpg\"></ion-img>\n\n  <ion-grid fixed>\n    <ion-row class=\"margin-row\">\n      <ion-col class=\"col-1\" size=\"6\" size-lg=\"3\" size-md=\"4\" size-sm=\"6\"\n               *ngFor=\"let option of homeOptions\">\n\n        <ion-card class=\"card-1\" (click)=\"navigateTo(option.name)\">\n          <ion-img class=\"img-1\" [src]=\"option.icon\"></ion-img>\n         <ion-card-subtitle class=\"subtitle-1\" text-center>{{option.name}}</ion-card-subtitle>\n        </ion-card>\n      </ion-col>\n\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n"
+module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button>\n        <ion-icon name=\"menu\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n\n\n    <ion-img class=\"logo-header\" src=\"/assets/logo-solo.png\"></ion-img>\n\n\n    <ion-buttons slot=\"end\">\n      <ion-button>\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n      <ion-img class=\"logo\" src=\"/assets/logo-titulo.jpg\"></ion-img>\n\n  <ion-grid fixed>\n    <ion-row class=\"margin-row\">\n      <ion-col class=\"col-1\" size=\"6\" size-lg=\"3\" size-md=\"4\" size-sm=\"6\"\n               *ngFor=\"let option of opciones\">\n\n        <ion-card class=\"card-1\" (click)=\"navigateTo(option)\">\n          <ion-img class=\"img-1\" [src]=\"option.imagen\"></ion-img>\n         <ion-card-subtitle class=\"subtitle-1\" text-center>{{option.nombre}}</ion-card-subtitle>\n        </ion-card>\n      </ion-col>\n\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -82,63 +82,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _services_nav_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/nav.service */ "./src/app/services/nav.service.ts");
+/* harmony import */ var _services_data_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
+
 
 
 
 let HomePage = class HomePage {
-    constructor(nav) {
+    constructor(nav, dataService) {
         this.nav = nav;
-        this.homeOptions = [
-            {
-                icon: '/assets/Iconos/can.svg',
-                name: 'Almacen',
-                redirectTo: '/familia'
-            },
-            {
-                icon: '/assets/Iconos/bottle.svg',
-                name: 'Bebidas',
-                redirectTo: '/familia'
-            },
-            {
-                icon: '/assets/Iconos/harvest.svg',
-                name: 'Almacen',
-                redirectTo: '/familia'
-            },
-            {
-                icon: '/assets/Iconos/meat-fish.svg',
-                name: 'Carnes y Pescados',
-                redirectTo: '/familia'
-            },
-            {
-                icon: '/assets/Iconos/quesochori.png',
-                name: 'Quesos y Fiambres',
-                redirectTo: '/familia'
-            },
-            {
-                icon: '/assets/Iconos/leche1.png',
-                name: 'Lacteos',
-                redirectTo: '/familia'
-            },
-            {
-                icon: '/assets/Iconos/freezer.svg',
-                name: 'Congelados',
-                redirectTo: '/familia'
-            },
-            {
-                icon: '/assets/Iconos/pie.svg',
-                name: 'Elaborados',
-                redirectTo: '/familia'
-            }
-        ];
+        this.dataService = dataService;
+        this.opciones = [];
     }
     ngOnInit() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.dataService.getHomeOptions().then(res => {
+                this.opciones = res;
+                console.log(res);
+            });
+        });
     }
-    navigateTo(name) {
-        return this.nav.push('familia', name);
+    navigateTo(opcion) {
+        return this.nav.push('familia', opcion);
     }
 };
 HomePage.ctorParameters = () => [
-    { type: _services_nav_service__WEBPACK_IMPORTED_MODULE_2__["Nav"] }
+    { type: _services_nav_service__WEBPACK_IMPORTED_MODULE_2__["Nav"] },
+    { type: _services_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"] }
 ];
 HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -146,7 +115,7 @@ HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./home.page.html */ "./node_modules/raw-loader/index.js!./src/app/pages/home/home.page.html"),
         styles: [__webpack_require__(/*! ./home.page.scss */ "./src/app/pages/home/home.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_nav_service__WEBPACK_IMPORTED_MODULE_2__["Nav"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_nav_service__WEBPACK_IMPORTED_MODULE_2__["Nav"], _services_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"]])
 ], HomePage);
 
 

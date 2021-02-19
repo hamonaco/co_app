@@ -452,7 +452,7 @@ module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-ap
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-card class=\"card\" (click)=\"navigateTo()\">\n  <ion-grid>\n    <ion-row>\n      <ion-col size=\"5\">\n        <ion-img [src]=\"producto.foto\"></ion-img>\n      </ion-col>\n      <ion-col size=\"7\">\n        <ion-row class=\"row-card\">\n          <ion-col no-padding size=\"12\">\n            <h1 class=\"h1-card\">{{producto.nombre}}</h1>\n          </ion-col>\n          <ion-col size=\"12\">\n            <ion-card-subtitle class=\"h3-card\">{{producto.marca}}</ion-card-subtitle>\n          </ion-col>\n\n\n        </ion-row>\n        <ion-row>\n\n        </ion-row>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n</ion-card>\n"
+module.exports = "<ion-card class=\"card\" (click)=\"navigateTo()\">\n  <ion-grid>\n    <ion-row>\n      <ion-col size=\"5\">\n        <ion-img [src]=\"producto.foto\"></ion-img>\n      </ion-col>\n      <ion-col size=\"7\">\n        <ion-row class=\"row-card\">\n          <ion-col no-padding size=\"12\">\n            <h1 class=\"h1-card\">{{producto.producto}}</h1>\n          </ion-col>\n          <ion-col size=\"12\">\n            <ion-card-subtitle class=\"h3-card\">{{producto.marca}}</ion-card-subtitle>\n          </ion-col>\n\n\n        </ion-row>\n        <ion-row>\n\n        </ion-row>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n</ion-card>\n"
 
 /***/ }),
 
@@ -485,22 +485,26 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
-    { path: 'home', loadChildren: () => __webpack_require__.e(/*! import() | pages-home-home-module */ "pages-home-home-module").then(__webpack_require__.bind(null, /*! ./pages/home/home.module */ "./src/app/pages/home/home.module.ts")).then(m => m.HomePageModule) },
+    { path: 'home', loadChildren: () => Promise.all(/*! import() | pages-home-home-module */[__webpack_require__.e("common"), __webpack_require__.e("pages-home-home-module")]).then(__webpack_require__.bind(null, /*! ./pages/home/home.module */ "./src/app/pages/home/home.module.ts")).then(m => m.HomePageModule) },
     {
         path: 'login',
         loadChildren: () => __webpack_require__.e(/*! import() | pages-login-login-module */ "pages-login-login-module").then(__webpack_require__.bind(null, /*! ./pages/login/login.module */ "./src/app/pages/login/login.module.ts")).then(m => m.LoginPageModule)
     },
     {
         path: 'familia',
-        loadChildren: () => __webpack_require__.e(/*! import() | pages-familia-familia-module */ "pages-familia-familia-module").then(__webpack_require__.bind(null, /*! ./pages/familia/familia.module */ "./src/app/pages/familia/familia.module.ts")).then(m => m.FamiliaPageModule)
+        loadChildren: () => Promise.all(/*! import() | pages-familia-familia-module */[__webpack_require__.e("common"), __webpack_require__.e("pages-familia-familia-module")]).then(__webpack_require__.bind(null, /*! ./pages/familia/familia.module */ "./src/app/pages/familia/familia.module.ts")).then(m => m.FamiliaPageModule)
     },
     {
         path: 'producto',
-        loadChildren: () => __webpack_require__.e(/*! import() | pages-producto-producto-module */ "pages-producto-producto-module").then(__webpack_require__.bind(null, /*! ./pages/producto/producto.module */ "./src/app/pages/producto/producto.module.ts")).then(m => m.ProductoPageModule)
+        loadChildren: () => Promise.all(/*! import() | pages-producto-producto-module */[__webpack_require__.e("common"), __webpack_require__.e("pages-producto-producto-module")]).then(__webpack_require__.bind(null, /*! ./pages/producto/producto.module */ "./src/app/pages/producto/producto.module.ts")).then(m => m.ProductoPageModule)
     },
     {
         path: 'nueva-oferta',
-        loadChildren: () => __webpack_require__.e(/*! import() | pages-nueva-oferta-nueva-oferta-module */ "pages-nueva-oferta-nueva-oferta-module").then(__webpack_require__.bind(null, /*! ./pages/nueva-oferta/nueva-oferta.module */ "./src/app/pages/nueva-oferta/nueva-oferta.module.ts")).then(m => m.NuevaOfertaPageModule)
+        loadChildren: () => Promise.all(/*! import() | pages-nueva-oferta-nueva-oferta-module */[__webpack_require__.e("common"), __webpack_require__.e("pages-nueva-oferta-nueva-oferta-module")]).then(__webpack_require__.bind(null, /*! ./pages/nueva-oferta/nueva-oferta.module */ "./src/app/pages/nueva-oferta/nueva-oferta.module.ts")).then(m => m.NuevaOfertaPageModule)
+    },
+    {
+        path: 'localizacion',
+        loadChildren: () => __webpack_require__.e(/*! import() | pages-localizacion-localizacion-module */ "common").then(__webpack_require__.bind(null, /*! ./pages/localizacion/localizacion.module */ "./src/app/pages/localizacion/localizacion.module.ts")).then(m => m.LocalizacionPageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
