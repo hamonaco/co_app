@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-import {Producto} from '../models/producto';
+import {Producto, Respuesta} from '../models/producto';
 import {environment} from '../../environments/environment';
 import {Storage} from '@ionic/storage';
 import {HomeOption} from '../models/homeOption';
@@ -13,6 +13,7 @@ const URL = environment.url;
 
 export class DataService {
 
+    paginaOferta = -1;
     token: string = null;
     constructor(private httpClient: HttpClient, private storage: Storage) {
     }
@@ -24,19 +25,26 @@ export class DataService {
 
     }
 
-    async getOfertas(categoria: number){
+    async getOfertas(categoria: number, pull: boolean){
+        if (pull){
+            this.paginaOferta = -1;
+        }
+        this.paginaOferta ++;
         await this.getToken();
-        return new Promise<Producto[]>(resolve => {
-            this.httpClient.get<Producto[]>(`${URL}/ofertas?categoria=${categoria}`,{
+
+        return new Promise<Respuesta>(resolve => {
+            this.httpClient.get<Respuesta>(`${URL}/ofertas?categoria=${categoria}&pagina=${this.paginaOferta}`,{
                 headers: {
                     "Authorization": this.token
                 }}).subscribe(res => {
-                    this.storage.set('ofertas',res);
+                    console.log(res.ofertas);
+                    this.storage.set('ofertas',res.ofertas);
                 resolve(res);
             }, error => {
                 resolve(error);
             });
         });
+
     }
 
     async getHomeOptions() {

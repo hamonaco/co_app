@@ -35,6 +35,7 @@ export class HomePage implements OnInit {
           {
             text: 'Si',
             handler: () => {
+              this.dataService.paginaOferta = 0;
               this.authService.logout();
             }
           },
@@ -50,6 +51,7 @@ export class HomePage implements OnInit {
 
 
   navigateTo(opcion: HomeOption) {
+    this.dataService.paginaOferta = -1;
     return this.nav.push('familia', opcion);
   }
 

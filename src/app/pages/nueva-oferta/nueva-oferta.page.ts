@@ -96,7 +96,7 @@ export class NuevaOfertaPage implements OnInit {
       const modal = await this.modalController.create({
         component: LocalizacionPage,
         componentProps:{
-          localizacion: {lat:res.coords.latitude,lng:res.coords.longitude,dragable:true}
+          localizacion: {lat:-60.944199,lng:-60.944199,dragable:true}
         }
       });
       await modal.present();

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {Plugins} from '@capacitor/core';
-const {Geolocation} = Plugins;
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,12 @@ export class LocationService {
   constructor() { }
 
   async getCurrentPosition() {
-    const coordinates = await Geolocation.getCurrentPosition();
-    return coordinates;
+  // await this.geolocation.getCurrentPosition().then((resp) => {
+  //     console.log(resp)
+  //     return resp.coords;
+  //   }).catch((error) => {
+  //     console.log('Error getting location', error);
+  //   });
+  return {lat: -60.944199, lng:-34.590326}
   }
 }

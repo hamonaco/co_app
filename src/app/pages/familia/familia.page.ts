@@ -11,7 +11,8 @@ import {HomeOption} from '../../models/homeOption';
 })
 export class FamiliaPage implements OnInit {
   opcion: HomeOption;
-  productos: Producto[];
+  productos: Producto[] = [];
+  deshabilitado: boolean = false;
 
   constructor(private nav: Nav, private dataService: DataService) { }
 
@@ -23,11 +24,25 @@ export class FamiliaPage implements OnInit {
 
   }
 
-  async cargarProductos() {
-    await this.dataService.getOfertas(this.opcion.id).then(res => {
+  async doRefresh(event){
+    this.productos = [];
+  await this.cargarProductos(event,true);
+  this.deshabilitado = false;
+
+  }
+
+  async cargarProductos(event? ,pull: boolean = false) {
+    await this.dataService.getOfertas(this.opcion.id,pull).then(res => {
       console.log(res);
-      this.productos = res;
-    })
+      this.productos.push(...res.ofertas);
+
+      if (event){
+        event.target.complete();
+        if(res.ofertas.length === 0){
+          this.deshabilitado = true;
+        }};
+    });
+
   }
 
   nuevaOferta(){

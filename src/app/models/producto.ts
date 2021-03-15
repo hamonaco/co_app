@@ -1,3 +1,9 @@
+export interface Respuesta {
+    ofertas: Producto[];
+    paginasTotales: number;
+    paginaActual: number;
+}
+
 export interface Producto {
     foto: string;
     categoria: number;
@@ -12,4 +18,5 @@ export interface Producto {
     lat: number;
     long: number;
 }
+
 
