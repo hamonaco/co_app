@@ -11,6 +11,12 @@
 
 <ion-content>
 
+  <!-- Refresher -->
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="more"></ion-icon>
@@ -28,6 +34,15 @@
 
   </ion-fab>
 
+  <!-- Productos -->
   <app-productos [productos]="productos"></app-productos>
+
+  <!-- Infinite scroll -->
+  <ion-infinite-scroll  [disabled]="deshabilitado"
+                        threshold="150px"
+                        (ionInfinite)="cargarProductos($event)">
+    <ion-infinite-scroll-content>
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>
