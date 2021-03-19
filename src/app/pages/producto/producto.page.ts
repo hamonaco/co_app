@@ -16,15 +16,15 @@ export class ProductoPage implements OnInit {
   constructor(private nav: Nav, private navController: NavController, private modalController:ModalController) { }
 
   ngOnInit() {
-this.producto = this.nav.get();
-console.log(this.producto);
+    this.producto = this.nav.get();
+    console.log(this.producto);
   }
 
   async openRegisterModal() {
     const modal = await this.modalController.create({
       component: LocalizacionPage,
       componentProps:{
-        localizacion: {lat: '48.858093', lng: '2.294694', dragable: false}
+        localizacion: {lat: this.producto.ubicacion.lat, lng: this.producto.ubicacion.long, dragable: false}
       }
     });
     await modal.present();

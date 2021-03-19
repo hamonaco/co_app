@@ -15,6 +15,10 @@ export interface Producto {
     precio: number;
     producto: string;
     descripcion: string;
+    ubicacion: Ubicacion;
+}
+
+export interface Ubicacion {
     lat: number;
     long: number;
 }

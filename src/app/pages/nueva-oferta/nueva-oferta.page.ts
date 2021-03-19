@@ -92,11 +92,12 @@ export class NuevaOfertaPage implements OnInit {
     });
     await loading.present();
     this.locationService.getCurrentPosition().then(async res => {
-      console.log(res);
+      const coords = await res;
+      console.log(coords);
       const modal = await this.modalController.create({
         component: LocalizacionPage,
         componentProps:{
-          localizacion: {lat:-60.944199,lng:-60.944199,dragable:true}
+          localizacion: {lat:-60.944199,lng:-60.944199, dragable:true}
         }
       });
       await modal.present();
@@ -127,8 +128,7 @@ export class NuevaOfertaPage implements OnInit {
       precio: this.nuevaOferta.value.precio,
       producto: this.nuevaOferta.value.producto,
       descripcion: this.nuevaOferta.value.descripcion,
-      lat: this.nuevaOferta.value.localizacion.lat,
-      long: this.nuevaOferta.value.localizacion.lng
+      ubicacion: {lat: this.nuevaOferta.value.localizacion.lat, long:this.nuevaOferta.value.localizacion.lng}
     };
     this.dataService.postOferta(this.oferta).then(res => {
       console.log(res);
