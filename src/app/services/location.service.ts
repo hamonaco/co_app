@@ -11,7 +11,7 @@ export class LocationService {
 
   async getCurrentPosition() {
    await this.geolocation.getCurrentPosition({timeout:10000, enableHighAccuracy: true, maximumAge: 7500}).then((resp) => {
-       return resp.coords;
+       return {lat: resp.coords.latitude, lng: resp.coords.longitude}
      }).catch((error) => {
        console.log('Error getting location', error);
        return error;

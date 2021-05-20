@@ -87,17 +87,16 @@ export class NuevaOfertaPage implements OnInit {
 
   async openRegisterModal() {
     let loading = await this.loadingController.create({
-      message: 'Cargando...',
+      message: 'Obteniendo la ubicacion...',
       spinner: 'crescent'
     });
     await loading.present();
-    this.locationService.getCurrentPosition().then(async res => {
-      const coords = await res;
-      console.log(coords);
+
+    const coords = await this.locationService.getCurrentPosition();
       const modal = await this.modalController.create({
         component: LocalizacionPage,
         componentProps:{
-          localizacion: {lat:-60.944199,lng:-60.944199, dragable:true}
+          localizacion: {coords, dragable:true}
         }
       });
       await modal.present();
@@ -107,7 +106,6 @@ export class NuevaOfertaPage implements OnInit {
       const data = await modal.onWillDismiss();
 
       this.nuevaOferta.controls['localizacion'].setValue(data.data);
-    })
 
   }
 
@@ -128,7 +126,7 @@ export class NuevaOfertaPage implements OnInit {
       precio: this.nuevaOferta.value.precio,
       producto: this.nuevaOferta.value.producto,
       descripcion: this.nuevaOferta.value.descripcion,
-      ubicacion: {lat: this.nuevaOferta.value.localizacion.lat, long:this.nuevaOferta.value.localizacion.lng}
+      ubicacion: {lat: -34.589916356521165, long: -60.94817060369721}
     };
     this.dataService.postOferta(this.oferta).then(res => {
       console.log(res);
