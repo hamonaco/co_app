@@ -9,6 +9,7 @@ import {HomeOption} from '../../models/homeOption';
 import {DataService} from '../../services/data.service';
 import {CameraResultType, CameraSource, Plugins} from '@capacitor/core';
 import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
 
 const { Camera } = Plugins;
 
@@ -26,9 +27,10 @@ export class NuevaOfertaPage implements OnInit {
   nuevaOferta: FormGroup;
   foto: any;
   today: Date = new Date();
+  coords: any;
 
 
-  constructor(private domSanitazer: DomSanitizer, private nav: Nav, private formBuilder: FormBuilder, private navController: NavController, private modalController: ModalController, private locationService:LocationService, private loadingController:LoadingController, private dataService: DataService) {
+  constructor(private domSanitazer: DomSanitizer,private geolocation: Geolocation, private nav: Nav, private formBuilder: FormBuilder, private navController: NavController, private modalController: ModalController, private locationService:LocationService, private loadingController:LoadingController, private dataService: DataService) {
     this.nuevaOferta = this.formBuilder.group({
       precio: ['', Validators.required],
       categoria: [this.nav.get().nombre, Validators.required],
@@ -45,23 +47,6 @@ export class NuevaOfertaPage implements OnInit {
     this.categoria = this.nav.get();
 
   }
-
-  // async takePicture() {
-  //   const image = await Camera.getPhoto({
-  //     quality: 90,
-  //     allowEditing: true,
-  //     resultType: CameraResultType.Uri
-  //   });
-  //   // image.webPath will contain a path that can be set as an image src.
-  //   // You can access the original file using image.path, which can be
-  //   // passed to the Filesystem API to read the raw data of the image,
-  //   // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-  //   var imageUrl = image.webPath;
-  //   var imagePath = image.path;
-  //   console.log(imagePath);
-  //   // Can be set to the src of an image now
-  //  // imageElement.src = imageUrl;
-  // }
 
   async takePicture() {
     try {
@@ -92,11 +77,15 @@ export class NuevaOfertaPage implements OnInit {
     });
     await loading.present();
 
-    const coords = await this.locationService.getCurrentPosition();
-      const modal = await this.modalController.create({
+    await this.geolocation.getCurrentPosition().then((resp)=>{
+      const coords = {lat:`${resp.coords.latitude}`,lng:`${resp.coords.longitude}`};
+      this.coords = coords;
+    });
+
+    const modal = await this.modalController.create({
         component: LocalizacionPage,
         componentProps:{
-          localizacion: {coords, dragable:true}
+          localizacion: {lat: this.coords.lat,lng: this.coords.lng, dragable:true}
         }
       });
       await modal.present();
@@ -126,11 +115,11 @@ export class NuevaOfertaPage implements OnInit {
       precio: this.nuevaOferta.value.precio,
       producto: this.nuevaOferta.value.producto,
       descripcion: this.nuevaOferta.value.descripcion,
-      ubicacion: {lat: -34.589916356521165, long: -60.94817060369721}
+      ubicacion: {lat: this.coords.lat, long: this.coords.long}
     };
     this.dataService.postOferta(this.oferta).then(res => {
       console.log(res);
-      this.navController.navigateBack('/home')
+      this.navController.navigateBack('/home');
     });
     loading.dismiss();
   }
