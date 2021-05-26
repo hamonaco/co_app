@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title text-center>{{opcion.nombre}}</ion-title>\n\n\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button>\n      <ion-icon name=\"more\"></ion-icon>\n    </ion-fab-button>\n\n    <ion-fab-list side=\"top\">\n      <ion-fab-button (click)=\"nuevaOferta()\">\n        <ion-icon color=\"primary\" name=\"add\"></ion-icon>\n      </ion-fab-button>\n      <ion-fab-button>\n        <ion-icon color=\"primary\" name=\"search\"></ion-icon>\n      </ion-fab-button>\n\n    </ion-fab-list>\n\n  </ion-fab>\n\n  <app-productos [productos]=\"productos\"></app-productos>\n\n</ion-content>\n"
+module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title text-center>{{opcion.nombre}}</ion-title>\n\n\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <!-- Refresher -->\n\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>\n\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button>\n      <ion-icon name=\"more\"></ion-icon>\n    </ion-fab-button>\n\n    <ion-fab-list side=\"top\">\n      <ion-fab-button (click)=\"nuevaOferta()\">\n        <ion-icon color=\"primary\" name=\"add\"></ion-icon>\n      </ion-fab-button>\n      <ion-fab-button>\n        <ion-icon color=\"primary\" name=\"search\"></ion-icon>\n      </ion-fab-button>\n\n    </ion-fab-list>\n\n  </ion-fab>\n\n  <!-- Productos -->\n  <app-productos [productos]=\"productos\"></app-productos>\n\n  <!-- Infinite scroll -->\n  <ion-infinite-scroll  [disabled]=\"deshabilitado\"\n                        threshold=\"150px\"\n                        (ionInfinite)=\"cargarProductos($event)\">\n    <ion-infinite-scroll-content>\n    </ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -126,6 +126,8 @@ let FamiliaPage = class FamiliaPage {
     constructor(nav, dataService) {
         this.nav = nav;
         this.dataService = dataService;
+        this.productos = [];
+        this.deshabilitado = false;
     }
     ngOnInit() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
@@ -134,11 +136,25 @@ let FamiliaPage = class FamiliaPage {
             yield this.cargarProductos();
         });
     }
-    cargarProductos() {
+    doRefresh(event) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            yield this.dataService.getOfertas(this.opcion.id).then(res => {
+            this.productos = [];
+            yield this.cargarProductos(event, true);
+            this.deshabilitado = false;
+        });
+    }
+    cargarProductos(event, pull = false) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.dataService.getOfertas(this.opcion.id, pull).then(res => {
                 console.log(res);
-                this.productos = res;
+                this.productos.push(...res.ofertas);
+                if (event) {
+                    event.target.complete();
+                    if (res.ofertas.length === 0) {
+                        this.deshabilitado = true;
+                    }
+                }
+                ;
             });
         });
     }

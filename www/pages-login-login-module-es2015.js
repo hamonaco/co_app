@@ -152,7 +152,6 @@ let LoginPage = class LoginPage {
     ngOnInit() {
     }
     onClick() {
-        console.log(this.usuario);
     }
     openRegisterModal() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
@@ -173,7 +172,7 @@ let LoginPage = class LoginPage {
             yield loading.present();
             this.authService.login(this.usuario.email, this.usuario.password).then(res => {
                 if (res == true) {
-                    this.navController.navigateForward('/home');
+                    this.navController.navigateRoot('/home', { animated: true });
                 }
                 else {
                     switch (res['status']) {
@@ -423,70 +422,6 @@ AlertService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])
 ], AlertService);
-
-
-
-/***/ }),
-
-/***/ "./src/app/services/auth.service.ts":
-/*!******************************************!*\
-  !*** ./src/app/services/auth.service.ts ***!
-  \******************************************/
-/*! exports provided: AuthService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthService", function() { return AuthService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
-
-
-
-
-
-const URL = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].url;
-let AuthService = class AuthService {
-    constructor(httpClient, storage) {
-        this.httpClient = httpClient;
-        this.storage = storage;
-        this.token = null;
-    }
-    login(email, password) {
-        const data = { email, password };
-        return new Promise(resolve => {
-            this.httpClient.post(`${URL}/login`, data).subscribe(res => {
-                this.guardarToken(res['token']);
-                resolve(true);
-            }, error => {
-                resolve(error);
-            });
-        });
-    }
-    guardarToken(token) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            this.token = token;
-            yield this.storage.set('token', token);
-        });
-    }
-    registroUsuario(email, password, username) {
-        const data = { email, password, username };
-        return this.httpClient.post(`${URL}/user/crear`, data);
-    }
-};
-AuthService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
-    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_3__["Storage"] }
-];
-AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _ionic_storage__WEBPACK_IMPORTED_MODULE_3__["Storage"]])
-], AuthService);
 
 
 

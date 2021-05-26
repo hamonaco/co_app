@@ -128,6 +128,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_data_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
 /* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @capacitor/core */ "./node_modules/@capacitor/core/dist/esm/index.js");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
+/* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
+
 
 
 
@@ -140,8 +142,9 @@ __webpack_require__.r(__webpack_exports__);
 
 const { Camera } = _capacitor_core__WEBPACK_IMPORTED_MODULE_8__["Plugins"];
 let NuevaOfertaPage = class NuevaOfertaPage {
-    constructor(domSanitazer, nav, formBuilder, navController, modalController, locationService, loadingController, dataService) {
+    constructor(domSanitazer, geolocation, nav, formBuilder, navController, modalController, locationService, loadingController, dataService) {
         this.domSanitazer = domSanitazer;
+        this.geolocation = geolocation;
         this.nav = nav;
         this.formBuilder = formBuilder;
         this.navController = navController;
@@ -165,22 +168,6 @@ let NuevaOfertaPage = class NuevaOfertaPage {
     ngOnInit() {
         this.categoria = this.nav.get();
     }
-    // async takePicture() {
-    //   const image = await Camera.getPhoto({
-    //     quality: 90,
-    //     allowEditing: true,
-    //     resultType: CameraResultType.Uri
-    //   });
-    //   // image.webPath will contain a path that can be set as an image src.
-    //   // You can access the original file using image.path, which can be
-    //   // passed to the Filesystem API to read the raw data of the image,
-    //   // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-    //   var imageUrl = image.webPath;
-    //   var imagePath = image.path;
-    //   console.log(imagePath);
-    //   // Can be set to the src of an image now
-    //  // imageElement.src = imageUrl;
-    // }
     takePicture() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             try {
@@ -206,23 +193,25 @@ let NuevaOfertaPage = class NuevaOfertaPage {
     openRegisterModal() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             let loading = yield this.loadingController.create({
-                message: 'Cargando...',
+                message: 'Obteniendo la ubicacion...',
                 spinner: 'crescent'
             });
             yield loading.present();
-            this.locationService.getCurrentPosition().then((res) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-                console.log(res);
-                const modal = yield this.modalController.create({
-                    component: _localizacion_localizacion_page__WEBPACK_IMPORTED_MODULE_4__["LocalizacionPage"],
-                    componentProps: {
-                        localizacion: { lat: res.coords.latitude, lng: res.coords.longitude, dragable: true }
-                    }
-                });
-                yield modal.present();
-                loading.dismiss();
-                const data = yield modal.onWillDismiss();
-                this.nuevaOferta.controls['localizacion'].setValue(data.data);
-            }));
+            yield this.geolocation.getCurrentPosition().then((resp) => {
+                const coords = { lat: `${resp.coords.latitude}`, lng: `${resp.coords.longitude}` };
+                this.coords = coords;
+            });
+            const modal = yield this.modalController.create({
+                component: _localizacion_localizacion_page__WEBPACK_IMPORTED_MODULE_4__["LocalizacionPage"],
+                componentProps: {
+                    localizacion: { lat: this.coords.lat, lng: this.coords.lng, dragable: true }
+                }
+            });
+            yield modal.present();
+            loading.dismiss();
+            const data = yield modal.onWillDismiss();
+            console.log(data);
+            this.nuevaOferta.controls['localizacion'].setValue(data.data);
         });
     }
     publicarOferta() {
@@ -243,9 +232,11 @@ let NuevaOfertaPage = class NuevaOfertaPage {
                 precio: this.nuevaOferta.value.precio,
                 producto: this.nuevaOferta.value.producto,
                 descripcion: this.nuevaOferta.value.descripcion,
+                //ubicaciones: {lat: this.nuevaOferta.value.localizacion.lat, long: this.nuevaOferta.value.localizacion.lng}
                 lat: this.nuevaOferta.value.localizacion.lat,
                 long: this.nuevaOferta.value.localizacion.lng
             };
+            console.log(this.oferta);
             this.dataService.postOferta(this.oferta).then(res => {
                 console.log(res);
                 this.navController.navigateBack('/home');
@@ -256,6 +247,7 @@ let NuevaOfertaPage = class NuevaOfertaPage {
 };
 NuevaOfertaPage.ctorParameters = () => [
     { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__["DomSanitizer"] },
+    { type: _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_10__["Geolocation"] },
     { type: _services_nav_service__WEBPACK_IMPORTED_MODULE_6__["Nav"] },
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
@@ -270,7 +262,7 @@ NuevaOfertaPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./nueva-oferta.page.html */ "./node_modules/raw-loader/index.js!./src/app/pages/nueva-oferta/nueva-oferta.page.html"),
         styles: [__webpack_require__(/*! ./nueva-oferta.page.scss */ "./src/app/pages/nueva-oferta/nueva-oferta.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__["DomSanitizer"], _services_nav_service__WEBPACK_IMPORTED_MODULE_6__["Nav"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"], _services_location_service__WEBPACK_IMPORTED_MODULE_5__["LocationService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _services_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__["DomSanitizer"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_10__["Geolocation"], _services_nav_service__WEBPACK_IMPORTED_MODULE_6__["Nav"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"], _services_location_service__WEBPACK_IMPORTED_MODULE_5__["LocationService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _services_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"]])
 ], NuevaOfertaPage);
 
 
@@ -289,25 +281,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LocationService", function() { return LocationService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @capacitor/core */ "./node_modules/@capacitor/core/dist/esm/index.js");
+/* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
 
 
 
-const { Geolocation } = _capacitor_core__WEBPACK_IMPORTED_MODULE_2__["Plugins"];
 let LocationService = class LocationService {
-    constructor() { }
+    constructor(geolocation) {
+        this.geolocation = geolocation;
+    }
     getCurrentPosition() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            const coordinates = yield Geolocation.getCurrentPosition();
-            return coordinates;
+            yield this.geolocation.getCurrentPosition({ timeout: 10000, enableHighAccuracy: false, maximumAge: 7500 }).then((resp) => {
+                console.log(resp);
+                return { lat: resp.coords.latitude, lng: resp.coords.longitude };
+            }).catch((error) => {
+                console.log('Error getting location', error);
+                return error;
+            });
         });
     }
 };
+LocationService.ctorParameters = () => [
+    { type: _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_2__["Geolocation"] }
+];
 LocationService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_2__["Geolocation"]])
 ], LocationService);
 
 

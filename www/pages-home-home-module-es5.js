@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button>\n        <ion-icon name=\"menu\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n\n\n    <ion-img class=\"logo-header\" src=\"/assets/logo-solo.png\"></ion-img>\n\n\n    <ion-buttons slot=\"end\">\n      <ion-button>\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n      <ion-img class=\"logo\" src=\"/assets/logo-titulo.jpg\"></ion-img>\n\n  <ion-grid fixed>\n    <ion-row class=\"margin-row\">\n      <ion-col class=\"col-1\" size=\"6\" size-lg=\"3\" size-md=\"4\" size-sm=\"6\"\n               *ngFor=\"let option of opciones\">\n\n        <ion-card class=\"card-1\" (click)=\"navigateTo(option)\">\n          <ion-img class=\"img-1\" [src]=\"option.imagen\"></ion-img>\n         <ion-card-subtitle class=\"subtitle-1\" text-center>{{option.nombre}}</ion-card-subtitle>\n        </ion-card>\n      </ion-col>\n\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n"
+module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button>\n        <ion-icon name=\"menu\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n\n\n    <ion-img class=\"logo-header\" src=\"/assets/logo-solo.png\"></ion-img>\n\n\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"logout()\"\n                  color=\"danger\">\n        <ion-icon slot=\"icon-only\" name=\"exit\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n      <ion-img class=\"logo\" src=\"/assets/logo-titulo.jpg\"></ion-img>\n\n  <ion-grid fixed>\n    <ion-row class=\"margin-row\">\n      <ion-col class=\"col-1\" size=\"6\" size-lg=\"3\" size-md=\"4\" size-sm=\"6\"\n               *ngFor=\"let option of opciones\">\n\n        <ion-card class=\"card-1\" (click)=\"navigateTo(option)\">\n          <ion-img class=\"img-1\" [src]=\"option.imagen\"></ion-img>\n         <ion-card-subtitle class=\"subtitle-1\" text-center>{{option.nombre}}</ion-card-subtitle>\n        </ion-card>\n      </ion-col>\n\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -86,14 +86,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_nav_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/nav.service */ "./src/app/services/nav.service.ts");
 /* harmony import */ var _services_data_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
+
 
 
 
 
 var HomePage = /** @class */ (function () {
-    function HomePage(nav, dataService) {
+    function HomePage(nav, dataService, authService, alertController) {
         this.nav = nav;
         this.dataService = dataService;
+        this.authService = authService;
+        this.alertController = alertController;
         this.opciones = [];
     }
     HomePage.prototype.ngOnInit = function () {
@@ -112,12 +118,49 @@ var HomePage = /** @class */ (function () {
             });
         });
     };
+    HomePage.prototype.logout = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var alert;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.alertController.create({
+                            header: 'Cuidado!',
+                            message: '¿Esta seguro que desea cerrar seesion?',
+                            buttons: [
+                                {
+                                    text: 'Si',
+                                    handler: function () {
+                                        _this.dataService.paginaOferta = 0;
+                                        _this.authService.logout();
+                                    }
+                                },
+                                {
+                                    text: 'No',
+                                    role: 'cancel'
+                                }
+                            ]
+                        })];
+                    case 1:
+                        alert = _a.sent();
+                        return [4 /*yield*/, alert.present()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ;
     HomePage.prototype.navigateTo = function (opcion) {
+        this.dataService.paginaOferta = -1;
         return this.nav.push('familia', opcion);
     };
     HomePage.ctorParameters = function () { return [
         { type: _services_nav_service__WEBPACK_IMPORTED_MODULE_2__["Nav"] },
-        { type: _services_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"] }
+        { type: _services_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"] },
+        { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"] }
     ]; };
     HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -125,7 +168,7 @@ var HomePage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./home.page.html */ "./node_modules/raw-loader/index.js!./src/app/pages/home/home.page.html"),
             styles: [__webpack_require__(/*! ./home.page.scss */ "./src/app/pages/home/home.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_nav_service__WEBPACK_IMPORTED_MODULE_2__["Nav"], _services_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_nav_service__WEBPACK_IMPORTED_MODULE_2__["Nav"], _services_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"]])
     ], HomePage);
     return HomePage;
 }());

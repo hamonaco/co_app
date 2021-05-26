@@ -142,7 +142,7 @@ let ProductoPage = class ProductoPage {
             const modal = yield this.modalController.create({
                 component: _localizacion_localizacion_page__WEBPACK_IMPORTED_MODULE_4__["LocalizacionPage"],
                 componentProps: {
-                    localizacion: { lat: '48.858093', lng: '2.294694', dragable: false }
+                    localizacion: { lat: this.producto.ubicacion.lat, lng: this.producto.ubicacion.long, dragable: false }
                 }
             });
             yield modal.present();

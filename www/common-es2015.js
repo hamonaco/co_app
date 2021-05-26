@@ -881,6 +881,7 @@ let DataService = class DataService {
     constructor(httpClient, storage) {
         this.httpClient = httpClient;
         this.storage = storage;
+        this.paginaOferta = -1;
         this.token = null;
     }
     getToken() {
@@ -890,16 +891,21 @@ let DataService = class DataService {
             });
         });
     }
-    getOfertas(categoria) {
+    getOfertas(categoria, pull) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            if (pull) {
+                this.paginaOferta = -1;
+            }
+            this.paginaOferta++;
             yield this.getToken();
             return new Promise(resolve => {
-                this.httpClient.get(`${URL}/ofertas?categoria=${categoria}`, {
+                this.httpClient.get(`${URL}/ofertas?categoria=${categoria}&pagina=${this.paginaOferta}`, {
                     headers: {
                         "Authorization": this.token
                     }
                 }).subscribe(res => {
-                    this.storage.set('ofertas', res);
+                    console.log(res.ofertas);
+                    this.storage.set('ofertas', res.ofertas);
                     resolve(res);
                 }, error => {
                     resolve(error);

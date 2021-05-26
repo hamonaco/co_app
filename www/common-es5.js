@@ -615,6 +615,7 @@ var DataService = /** @class */ (function () {
     function DataService(httpClient, storage) {
         this.httpClient = httpClient;
         this.storage = storage;
+        this.paginaOferta = -1;
         this.token = null;
     }
     DataService.prototype.getToken = function () {
@@ -630,21 +631,27 @@ var DataService = /** @class */ (function () {
             });
         });
     };
-    DataService.prototype.getOfertas = function (categoria) {
+    DataService.prototype.getOfertas = function (categoria, pull) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getToken()];
+                    case 0:
+                        if (pull) {
+                            this.paginaOferta = -1;
+                        }
+                        this.paginaOferta++;
+                        return [4 /*yield*/, this.getToken()];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, new Promise(function (resolve) {
-                                _this.httpClient.get(URL + "/ofertas?categoria=" + categoria, {
+                                _this.httpClient.get(URL + "/ofertas?categoria=" + categoria + "&pagina=" + _this.paginaOferta, {
                                     headers: {
                                         "Authorization": _this.token
                                     }
                                 }).subscribe(function (res) {
-                                    _this.storage.set('ofertas', res);
+                                    console.log(res.ofertas);
+                                    _this.storage.set('ofertas', res.ofertas);
                                     resolve(res);
                                 }, function (error) {
                                     resolve(error);

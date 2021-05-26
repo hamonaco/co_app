@@ -3,12 +3,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoadingController, ModalController, NavController} from '@ionic/angular';
 import {Producto} from '../../models/producto';
 import {LocalizacionPage} from '../localizacion/localizacion.page';
-import {LocationService} from '../../services/location.service';
 import {Nav} from '../../services/nav.service';
 import {HomeOption} from '../../models/homeOption';
 import {DataService} from '../../services/data.service';
-import {CameraResultType, CameraSource, Plugins} from '@capacitor/core';
-import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
+import {CameraResultType,Plugins} from '@capacitor/core';
+import {DomSanitizer} from '@angular/platform-browser';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 
 const { Camera } = Plugins;
@@ -30,7 +29,7 @@ export class NuevaOfertaPage implements OnInit {
   coords: any;
 
 
-  constructor(private domSanitazer: DomSanitizer,private geolocation: Geolocation, private nav: Nav, private formBuilder: FormBuilder, private navController: NavController, private modalController: ModalController, private locationService:LocationService, private loadingController:LoadingController, private dataService: DataService) {
+  constructor(private domSanitazer: DomSanitizer,private geolocation: Geolocation, private nav: Nav, private formBuilder: FormBuilder, private navController: NavController, private modalController: ModalController, private loadingController:LoadingController, private dataService: DataService) {
     this.nuevaOferta = this.formBuilder.group({
       precio: ['', Validators.required],
       categoria: [this.nav.get().nombre, Validators.required],
@@ -93,6 +92,7 @@ export class NuevaOfertaPage implements OnInit {
       loading.dismiss();
 
       const data = await modal.onWillDismiss();
+      console.log(data);
 
       this.nuevaOferta.controls['localizacion'].setValue(data.data);
 
@@ -115,8 +115,12 @@ export class NuevaOfertaPage implements OnInit {
       precio: this.nuevaOferta.value.precio,
       producto: this.nuevaOferta.value.producto,
       descripcion: this.nuevaOferta.value.descripcion,
-      ubicacion: {lat: this.coords.lat, long: this.coords.long}
+      //ubicaciones: {lat: this.nuevaOferta.value.localizacion.lat, long: this.nuevaOferta.value.localizacion.lng}
+      lat: this.nuevaOferta.value.localizacion.lat,
+      long: this.nuevaOferta.value.localizacion.lng
+
     };
+    console.log(this.oferta);
     this.dataService.postOferta(this.oferta).then(res => {
       console.log(res);
       this.navController.navigateBack('/home');
