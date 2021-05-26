@@ -8,6 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {Nav} from './services/nav.service';
 import {ComponentModule} from './components/component.module';
 import {IonicStorageModule} from '@ionic/storage';
+import {Geolocation} from '@ionic-native/geolocation/ngx'
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import {IonicStorageModule} from '@ionic/storage';
     IonicStorageModule.forRoot()],
   providers: [
       Nav,
+      Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
