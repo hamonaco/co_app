@@ -18,10 +18,7 @@ export class FamiliaPage implements OnInit {
 
   async ngOnInit() {
     this.opcion = this.nav.get();
-    console.log(this.opcion);
     await this.cargarProductos();
-
-
   }
 
   async doRefresh(event){

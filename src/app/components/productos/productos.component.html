@@ -1,11 +1,17 @@
 
 <ion-grid>
-  <ion-row>
+  <ion-row *ngIf="productos.length > 0">
     <ion-col size="12" *ngFor="let producto of productos">
 
     <app-producto [producto]="producto"></app-producto>
 
     </ion-col>
 
+  </ion-row>
+
+  <ion-row *ngIf="productos.length == 0">
+    <ion-img class="imagen-carrito" src="/assets/carrito.png"></ion-img>
+    <h1 class="titulo">No hay ofertas a la vista</h1>
+    <label class="subtitulo">Comparti tu oferta para ayudar a otros</label>
   </ion-row>
 </ion-grid>
