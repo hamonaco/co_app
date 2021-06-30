@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {LoadingController, ModalController, NavController} from '@ionic/angular';
+import {LoadingController, ModalController, NavController, ToastController} from '@ionic/angular';
 import {Producto} from '../../models/producto';
 import {LocalizacionPage} from '../localizacion/localizacion.page';
 import {Nav} from '../../services/nav.service';
@@ -29,7 +29,7 @@ export class NuevaOfertaPage implements OnInit {
   coords: any;
 
 
-  constructor(private domSanitazer: DomSanitizer,private geolocation: Geolocation, private nav: Nav, private formBuilder: FormBuilder, private navController: NavController, private modalController: ModalController, private loadingController:LoadingController, private dataService: DataService) {
+  constructor(private domSanitazer: DomSanitizer, private toastController: ToastController ,private geolocation: Geolocation, private nav: Nav, private formBuilder: FormBuilder, private navController: NavController, private modalController: ModalController, private loadingController:LoadingController, private dataService: DataService) {
     this.nuevaOferta = this.formBuilder.group({
       precio: ['', Validators.required],
       categoria: [this.nav.get().nombre, Validators.required],
@@ -120,10 +120,21 @@ export class NuevaOfertaPage implements OnInit {
       long: this.nuevaOferta.value.localizacion.lng
 
     };
-    console.log(this.oferta);
-    this.dataService.postOferta(this.oferta).then(res => {
-      console.log(res);
-      this.navController.navigateBack('/home');
+    this.dataService.postOferta(this.oferta).then(async res => {
+      if (res) {
+        const toast = await this.toastController.create({
+          message: 'Gracias por compartir tu oferta',
+          duration: 2000
+        });
+        toast.present();
+        this.navController.navigateBack('/home');
+      }else {
+        const toast = await this.toastController.create({
+          message: 'Tu oferta no pudo ser publicada',
+          duration: 2000
+        });
+        toast.present();
+      }
     });
     loading.dismiss();
   }
