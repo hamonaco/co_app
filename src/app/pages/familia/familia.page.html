@@ -18,20 +18,9 @@
   </ion-refresher>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
-      <ion-icon name="more"></ion-icon>
+    <ion-fab-button color="primary" (click)="nuevaOferta()">
+      <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-
-    <ion-fab-list side="top">
-      <ion-fab-button (click)="nuevaOferta()">
-        <ion-icon color="primary" name="add"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button>
-        <ion-icon color="primary" name="search"></ion-icon>
-      </ion-fab-button>
-
-    </ion-fab-list>
-
   </ion-fab>
 
   <!-- Productos -->
