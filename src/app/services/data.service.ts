@@ -68,9 +68,9 @@ export class DataService {
                 headers: {
                     "Authorization": this.token
                 }}).subscribe(res => {
-                resolve(res);
+                resolve(true);
             }, error => {
-                resolve(error);
+                resolve(false);
             });
         });
     }
