@@ -5,6 +5,7 @@ import {Producto, Respuesta} from '../models/producto';
 import {environment} from '../../environments/environment';
 import {Storage} from '@ionic/storage';
 import {HomeOption} from '../models/homeOption';
+import {error} from 'util';
 
 const URL = environment.url;
 @Injectable({
@@ -67,12 +68,30 @@ export class DataService {
             this.httpClient.post(`${URL}/ofertas`,oferta,{
                 headers: {
                     "Authorization": this.token
-                }}).subscribe(res => {
-                resolve(true);
+                }}).subscribe(async res => {
+                await this.postPhoto(22,oferta.foto).then(res => {
+                    console.log(res)
+                    resolve(true);
+                })
+
             }, error => {
                 resolve(false);
             });
         });
+    }
+
+    async postPhoto(id: number, photo: any){
+        return new Promise(resolve => {
+            this.httpClient.post(`${URL}/ofertas/${id}/foto`,photo,{
+                headers: {
+                    "Authorization": this.token
+                }}).subscribe( res => {
+                    resolve(res);},
+                err => {
+                    resolve(err);
+            })
+            }
+        )
     }
 
 

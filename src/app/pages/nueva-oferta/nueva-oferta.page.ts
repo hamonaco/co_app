@@ -105,7 +105,7 @@ export class NuevaOfertaPage implements OnInit {
     });
     await loading.present();
     this.oferta = {
-      foto: null,
+      foto: '/Users/kano/CazandoOfertas/co_app/src/assets/cazando-logo.png',
       categoria: this.categoria.id,
       marca: this.nuevaOferta.value.marca,
       establecimiento: this.nuevaOferta.value.establecimiento,

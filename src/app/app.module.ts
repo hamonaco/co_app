@@ -8,7 +8,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {Nav} from './services/nav.service';
 import {ComponentModule} from './components/component.module';
 import {IonicStorageModule} from '@ionic/storage';
-import {Geolocation} from '@ionic-native/geolocation/ngx'
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {PipesModule} from './pipes/pipes.module';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +18,7 @@ import {Geolocation} from '@ionic-native/geolocation/ngx'
   imports: [BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+      PipesModule,
     HttpClientModule,
     ComponentModule,
     IonicStorageModule.forRoot()],
